@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_SPALayout.cshtml";
+    
+    ViewBag.Title = "Deep Purple Bricks";
+    ViewBag.Description = "Technical assignment for a job application.";
+    // Referrer - (Optional) Controls what is sent in the HTTP referrer header when a client navigates from your page 
+    //            to an external site for increased user privacy and security. See ReferrerMode for more information.
+    ViewBag.ReferrerMode = ReferrerMode.OriginWhenCrossOrigin;
+
+    // Add Twitter Card and Open Graph social meta tags so we can customize what happens when our page is shared
+    // on these social networks. Note that other social networks like Google+, Pintrest and others also use these.
+    ViewBag.TwitterCard = new SummaryLargeImageTwitterCard("@ghingyi");
+    ViewBag.OpenGraph = new OpenGraphWebsite(
+        ViewBag.Title,
+        new OpenGraphImage(Url.AbsoluteContent("~/content/icons/open-graph-1200x630.png")) { Height = 630, Type = ContentType.Png, Width = 1200 })
+    {
+        Determiner = OpenGraphDeterminer.Blank,
+        SiteName = Application.Name
+    };
+}
+
+<ng-view></ng-view>

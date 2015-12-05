@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deeP.AuthorizationService", "deeP.AuthorizationService\deeP.AuthorizationService.csproj", "{70844E6F-3C4F-44F1-860F-17E009429910}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deeP.SPAWeb", "deeP.SPAWeb\deeP.SPAWeb.csproj", "{DCFCF626-24ED-44A1-ACF2-A8FE8006E99B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{70844E6F-3C4F-44F1-860F-17E009429910}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70844E6F-3C4F-44F1-860F-17E009429910}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70844E6F-3C4F-44F1-860F-17E009429910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCFCF626-24ED-44A1-ACF2-A8FE8006E99B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCFCF626-24ED-44A1-ACF2-A8FE8006E99B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCFCF626-24ED-44A1-ACF2-A8FE8006E99B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCFCF626-24ED-44A1-ACF2-A8FE8006E99B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
