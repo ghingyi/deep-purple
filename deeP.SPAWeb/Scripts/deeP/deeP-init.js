@@ -12,27 +12,27 @@
         // Setup routes
         $routeProvider.
             when(navigationUris.home, {
-                templateUrl: "/content/templates/views/app-default.html",
+                templateUrl: "/content/templates/views/default.html",
                 controller: "defaultController",
                 controllerAs: "defaultCtrl"
             }).
             when(navigationUris.login, {
-                templateUrl: "/content/templates/views/app-login.html",
+                templateUrl: "/content/templates/views/login.html",
                 controller: "loginController",
                 controllerAs: "loginCtrl"
             }).
             when(navigationUris.registerSeller, {
-                templateUrl: "/content/templates/views/app-register-seller.html",
+                templateUrl: "/content/templates/views/register-seller.html",
                 controller: "registerSellerController",
                 controllerAs: "registerCtrl"
             }).
             when(navigationUris.registerBuyer, {
-                templateUrl: "/content/templates/views/app-register-buyer.html",
+                templateUrl: "/content/templates/views/register-buyer.html",
                 controller: "registerBuyerController",
                 controllerAs: "registerCtrl"
             }).
             when(navigationUris.user, {
-                templateUrl: "/content/templates/views/app-user.html",
+                templateUrl: "/content/templates/views/user.html",
                 controller: "userController",
                 controllerAs: "userCtrl",
                 resolve: {
@@ -40,7 +40,7 @@
                 }
             }).
             when(navigationUris.propertyDetails + "/:id", {
-                templateUrl: "/content/templates/views/app-propertyDetails.html",
+                templateUrl: "/content/templates/views/propertyDetails.html",
                 controller: "propertyDetailsController",
                 controllerAs: "propertyDetailsCtrl",
                 resolve: {

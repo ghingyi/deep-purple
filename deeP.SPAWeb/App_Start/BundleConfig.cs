@@ -160,7 +160,7 @@
 
             // TODO: configure CDN
             Bundle deePCoreBundle = new ScriptBundle("~/bundles/deePApp")
-                .Include("~/Scripts/deeP/app-*");
+                .Include("~/Scripts/deeP/Authorization/*.js", "~/Scripts/deeP/Properties/*.js", "~/Scripts/deeP/AppViews/*.js");
             bundles.Add(deePCoreBundle);
 
             // Script bundle for the site. The fall-back scripts are for when a CDN fails, in this case we load a local

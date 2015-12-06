@@ -2,7 +2,7 @@
 /// <reference path="../angular.js" />
 /// <reference path="../angular-mocks.js" />
 /// <reference path="../deeP/deeP-init.js" />
-/// <reference path="../deeP/app-accountService.js" />
+/// <reference path="../deeP/Authorization/accountService.js" />
 
 describe("AccountService", function () {
 
