@@ -420,13 +420,32 @@
     <Content Include="Content\icons\favicon-192x192.png" />
     <Content Include="Content\icons\favicon-32x32.png" />
     <Content Include="Content\icons\favicon-96x96.png" />
+    <Content Include="Content\jasmine\jasmine.css" />
+    <Content Include="Content\jasmine\jasmine_favicon.png" />
     <Content Include="Content\ng-sortable.css" />
     <Content Include="Content\ng-sortable.min.css">
       <DependentUpon>ng-sortable.css</DependentUpon>
     </Content>
+    <Content Include="Content\templates\directives\accountInfo.html" />
+    <Content Include="Content\templates\views\app-login.min.html">
+      <DependentUpon>app-login.html</DependentUpon>
+    </Content>
+    <Content Include="Content\templates\views\app-register-buyer.min.html">
+      <DependentUpon>app-register-buyer.html</DependentUpon>
+    </Content>
+    <Content Include="Content\templates\views\app-register-seller.min.html">
+      <DependentUpon>app-register-seller.html</DependentUpon>
+    </Content>
+    <Content Include="Content\templates\views\app-user.html" />
+    <Content Include="Content\templates\views\app-register-buyer.html" />
+    <Content Include="Content\templates\views\app-login.html" />
+    <Content Include="Content\templates\views\app-register-seller.html" />
     <Content Include="Content\templates\views\app-default.html" />
     <Content Include="Content\templates\views\app-default.min.html">
       <DependentUpon>app-default.html</DependentUpon>
+    </Content>
+    <Content Include="Content\templates\views\app-user.min.html">
+      <DependentUpon>app-user.html</DependentUpon>
     </Content>
     <Content Include="Content\ui-bootstrap-csp.css" />
     <Content Include="Content\ui-bootstrap-csp.min.css">
@@ -469,6 +488,10 @@
     <Content Include="Scripts\angular-google-maps.js" />
     <Content Include="Scripts\angular-google-maps.min.js">
       <DependentUpon>angular-google-maps.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\angular-local-storage.js" />
+    <Content Include="Scripts\angular-local-storage.min.js">
+      <DependentUpon>angular-local-storage.js</DependentUpon>
     </Content>
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-mocks.min.js">
@@ -518,13 +541,53 @@
     <Content Include="Scripts\chronicle.min.js">
       <DependentUpon>chronicle.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\deeP\app-deePDefaultController.js" />
-    <Content Include="Scripts\deeP\app-deePDefaultController.min.js">
-      <DependentUpon>app-deePDefaultController.js</DependentUpon>
+    <Content Include="Scripts\deeP\app-ngIfInRole.js" />
+    <Content Include="Scripts\deeP\app-accountInfo.js" />
+    <Content Include="Scripts\deeP\app-accountInfo.min.js">
+      <DependentUpon>app-accountInfo.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\deeP\deePInit.js" />
-    <Content Include="Scripts\deeP\deepInit.min.js">
-      <DependentUpon>deePInit.js</DependentUpon>
+    <Content Include="Scripts\deeP\app-authorizationInterceptorService.js" />
+    <Content Include="Scripts\deeP\app-authorizationInterceptorService.min.js">
+      <DependentUpon>app-authorizationInterceptorService.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-accountService.js" />
+    <Content Include="Scripts\deeP\app-accountService.min.js">
+      <DependentUpon>app-accountService.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-loginController.min.js">
+      <DependentUpon>app-loginController.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-ngIfInRole.min.js">
+      <DependentUpon>app-ngIfInRole.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-registerBuyerController.min.js">
+      <DependentUpon>app-registerBuyerController.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-registerSellerController.min.js">
+      <DependentUpon>app-registerSellerController.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-userController.js" />
+    <Content Include="Scripts\deeP\app-loginController.js" />
+    <Content Include="Scripts\deeP\app-registerSellerController.js" />
+    <Content Include="Scripts\deeP\app-registerBuyerController.js" />
+    <Content Include="Scripts\deeP\app-defaultController.js" />
+    <Content Include="Scripts\deeP\app-defaultController.min.js">
+      <DependentUpon>app-defaultController.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-userController.min.js">
+      <DependentUpon>app-userController.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\deeP-auth.min.js">
+      <DependentUpon>deeP-auth.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\deeP-config.js" />
+    <Content Include="Scripts\deeP\deeP-config.min.js">
+      <DependentUpon>deeP-config.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\deeP-auth.js" />
+    <Content Include="Scripts\deeP\deeP-init.js" />
+    <Content Include="Scripts\deeP\deeP-init.min.js">
+      <DependentUpon>deeP-init.js</DependentUpon>
     </Content>
     <Content Include="Scripts\Fallback\scripts.min.js">
       <DependentUpon>scripts.js</DependentUpon>
@@ -602,11 +665,44 @@
     <Content Include="Scripts\googletagmanagerinit.min.js.map">
       <DependentUpon>googletagmanagerinit.min.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\deeP\app-deePDefaultController.min.js.map">
-      <DependentUpon>app-deePDefaultController.min.js</DependentUpon>
+    <Content Include="Scripts\deeP\app-defaultController.min.js.map">
+      <DependentUpon>app-defaultController.min.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\deeP\deepInit.min.js.map">
-      <DependentUpon>deepInit.min.js</DependentUpon>
+    <Content Include="Scripts\deeP\app-accountService.min.js.map">
+      <DependentUpon>app-accountService.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-loginController.min.js.map">
+      <DependentUpon>app-loginController.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-registerBuyerController.min.js.map">
+      <DependentUpon>app-registerBuyerController.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-registerSellerController.min.js.map">
+      <DependentUpon>app-registerSellerController.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-userController.min.js.map">
+      <DependentUpon>app-userController.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-authorizationInterceptorService.min.js.map">
+      <DependentUpon>app-authorizationInterceptorService.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-accountInfo.min.js.map">
+      <DependentUpon>app-accountInfo.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\deeP-init.min.js.map">
+      <DependentUpon>deeP-init.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\app-ngIfInRole.min.js.map">
+      <DependentUpon>app-ngIfInRole.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\deeP-config.min.js.map">
+      <DependentUpon>deeP-config.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\deeP-auth.min.js.map">
+      <DependentUpon>deeP-auth.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\angular-local-storage.min.js.map">
+      <DependentUpon>angular-local-storage.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\fastclick.js" />
@@ -617,6 +713,10 @@
     <Content Include="Scripts\googletagmanagerinit.min.js">
       <DependentUpon>googletagmanagerinit.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\jasmine\boot.js" />
+    <Content Include="Scripts\jasmine\console.js" />
+    <Content Include="Scripts\jasmine\jasmine-html.js" />
+    <Content Include="Scripts\jasmine\jasmine.js" />
     <Content Include="Scripts\jquery-2.1.4.intellisense.min.js">
       <DependentUpon>jquery-2.1.4.intellisense.js</DependentUpon>
     </Content>
@@ -670,6 +770,7 @@
     <Content Include="Scripts\stateful-fastclick.min.js">
       <DependentUpon>stateful-fastclick.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Tests\accountServiceTest.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\_references.min.js">
       <DependentUpon>_references.js</DependentUpon>
@@ -741,6 +842,9 @@
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

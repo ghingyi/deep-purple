@@ -115,18 +115,15 @@
     {
         <meta name="author" content="@ViewBag.Author">
     }
-    @* Render Twitter Card meta tags. *@
-    @if (ViewBag.TwitterCard != null)
+    @* Render Twitter Card meta tags. *@@if (ViewBag.TwitterCard != null)
     {
         @Html.TwitterCard((TwitterCard)ViewBag.TwitterCard);
     }
-    @* Render Facebook Open Graph meta tags. *@
-    @if (ViewBag.OpenGraph != null)
+    @* Render Facebook Open Graph meta tags. *@@if (ViewBag.OpenGraph != null)
     {
         @Html.OpenGraph((OpenGraphMetadata)ViewBag.OpenGraph);
     }
-    @* Render the Referrer meta tag for increased privacy. *@
-    @if (ViewBag.ReferrerMode != null)
+    @* Render the Referrer meta tag for increased privacy. *@@if (ViewBag.ReferrerMode != null)
     {
         @Html.ReferrerMeta((ReferrerMode)ViewBag.ReferrerMode)
     }
@@ -136,110 +133,111 @@
         by search engines. The settings in this project should make this redundant, unless you are mixing HTTP and
         HTTPS or you have multiple URL's to the same resource which you should avoid.
         (See http://googlewebmastercentral.blogspot.co.uk/2009/02/specify-your-canonical.html). *@
-    @*<link rel="canonical" href="">*@
+        @*<link rel="canonical" href="">*@
 
 
-    @* Atom 1.0 Feed - Link to the. This enables the 'Subscribe to this page' button in FireFox. *@
-    <link href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" rel="alternate" title="@Application.Name Feed" type="application/atom+xml">
+        @* Atom 1.0 Feed - Link to the. This enables the 'Subscribe to this page' button in FireFox. *@
+        <link href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" rel="alternate" title="@Application.Name Feed" type="application/atom+xml">
 
 
-    @* OpenSearch - (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d and http://www.opensearch.org) *@
-    <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
+        @* OpenSearch - (See http://www.hanselman.com/blog/CommentView.aspx?guid=50cc95b1-c043-451f-9bc2-696dc564766d and http://www.opensearch.org) *@
+        <link href="@Url.RouteUrl(HomeControllerRoute.GetOpenSearchXml).TrimEnd('/')" rel="search" title="ASP.NET MVC Boilerplate Search" type="application/opensearchdescription+xml">
 
-    @if (ViewBag.BaseUri != null)
-    {
-        <base href="@ViewBag.BaseUri">
-    }
-    
-    @* You can use the head section to render additional meta tags. *@
-    @RenderSection("head", required: false)
-</head>
-<body>
-    @Html.Partial("_GoogleTagManagerInit")
+        @if (ViewBag.BaseUri != null)
+        {
+            <base href="@ViewBag.BaseUri">
+        }
+
+        @* You can use the head section to render additional meta tags. *@
+        @RenderSection("head", required: false)
+    </head>
+    <body>
+        @Html.Partial("_GoogleTagManagerInit")
         @* Skip to main content link for people who use screen readers. sr-only makes this only visible to screen readers.
-        See http://a11yproject.com/posts/skip-nav-links/. *@
-    <a href="#main" class="sr-only sr-only-focusable">Skip to main content</a>
-    @* nav - The main navigation for the site. *@
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span aria-hidden="true" class="icon-bar"></span>
-                    <span aria-hidden="true" class="icon-bar"></span>
-                    <span aria-hidden="true" class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" role="banner" href="@Url.RouteUrl(HomeControllerRoute.GetIndex)" target="_self"><span class="fa fa-star"></span> @Application.Name</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="@Url.RouteUrl(HomeControllerRoute.GetAbout)" target="_self"><span aria-hidden="true" class="fa fa-users"></span> About</a></li>
-                    <li><a href="@Url.RouteUrl(HomeControllerRoute.GetContact)" target="_self"><span aria-hidden="true" class="fa fa-phone"></span> Contact</a></li>
-                    <li><a href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" target="_self"><span aria-hidden="true" class="fa fa-rss"></span> RSS</a></li>
-                    @if (HttpContext.Current.IsDebuggingEnabled)
-                    {
-                        // if <compilation debug="true"> is set in Web.config.
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown"><span aria-hidden="true" class="fa fa-cogs"></span> Debug <span aria-hidden="true" class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="/@ConfigurationManager.AppSettings["elmah.mvc.route"]" target="_blank"><span aria-hidden="true" class="fa fa-life-ring"></span> Elmah</a></li>
-                                <li><a href="/glimpse.axd" target="_blank"><span aria-hidden="true" class="fa fa-line-chart"></span> Glimpse</a></li>
-                                <li><a href="/trace.axd" target="_blank"><span aria-hidden="true" class="fa fa-heart"></span> Tracing</a></li>
-                            </ul>
-                        </li>
-                    }
-                </ul>
-                <form action="@Url.RouteUrl(HomeControllerRoute.GetSearch)" class="navbar-form navbar-right" method="get" role="search">
-                    <div class="input-group">
-                        <input aria-label="Search" class="form-control" maxlength="2048" name="query" placeholder="Search" title="Search" type="text">
-                        <div class="input-group-btn">
-                            <button aria-label="Search" class="btn btn-default" type="submit"><span class="fa fa-search"></span></button>
+            See http://a11yproject.com/posts/skip-nav-links/. *@
+        <a href="#main" class="sr-only sr-only-focusable">Skip to main content</a>
+        @* nav - The main navigation for the site. *@
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span aria-hidden="true" class="icon-bar"></span>
+                        <span aria-hidden="true" class="icon-bar"></span>
+                        <span aria-hidden="true" class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" role="banner" href="@Url.Action(HomeControllerAction.Index, ControllerName.Home)" target="_self"><span class="fa fa-star"></span> @Application.Name</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="@Url.RouteUrl(HomeControllerRoute.GetAbout)" target="_self"><span aria-hidden="true" class="fa fa-users"></span> About</a></li>
+                        <li><a href="@Url.RouteUrl(HomeControllerRoute.GetContact)" target="_self"><span aria-hidden="true" class="fa fa-phone"></span> Contact</a></li>
+                        <li><a href="@Url.RouteUrl(HomeControllerRoute.GetFeed)" target="_self"><span aria-hidden="true" class="fa fa-rss"></span> RSS</a></li>
+                        @if (HttpContext.Current.IsDebuggingEnabled)
+                        {
+                            // if <compilation debug="true"> is set in Web.config.
+                            <li class="dropdown">
+                                <a class="dropdown-toggle" role="button" aria-expanded="false" href="#" data-toggle="dropdown"><span aria-hidden="true" class="fa fa-cogs"></span> Debug <span aria-hidden="true" class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="/@ConfigurationManager.AppSettings["elmah.mvc.route"]" target="_blank"><span aria-hidden="true" class="fa fa-life-ring"></span> Elmah</a></li>
+                                    <li><a href="/glimpse.axd" target="_blank"><span aria-hidden="true" class="fa fa-line-chart"></span> Glimpse</a></li>
+                                    <li><a href="/trace.axd" target="_blank"><span aria-hidden="true" class="fa fa-heart"></span> Tracing</a></li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                    <account-info class="nav navbar-nav navbar-right"></account-info>
+                    <form action="@Url.RouteUrl(HomeControllerRoute.GetSearch)" class="navbar-form navbar-right" method="get" role="search">
+                        <div class="input-group">
+                            <input aria-label="Search" class="form-control" maxlength="2048" name="query" placeholder="Search" title="Search" type="text">
+                            <div class="input-group-btn">
+                                <button aria-label="Search" class="btn btn-default" type="submit"><span class="fa fa-search"></span></button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
+        </nav>
+        <div id="main" class="container-fluid body-content" role="main">
+            <!--[if lt IE 8]>
+                <div class="alert alert-warning" role="alert">
+                    <p>You are using an outdated browser. Please <a class="alert-link" href="http://browsehappy.com/" target="_self">upgrade your browser</a> to improve your experience.</p>
+                </div>
+            <![endif]-->
+            @RenderBody()
+            <footer role="contentinfo">
+                <p class="text-muted">&copy; @DateTime.Now.Year - @Application.Name</p>
+            </footer>
         </div>
-    </nav>
-    <div id="main" class="container body-content" role="main">
-        <!--[if lt IE 8]>
-            <div class="alert alert-warning" role="alert">
-                <p>You are using an outdated browser. Please <a class="alert-link" href="http://browsehappy.com/" target="_self">upgrade your browser</a> to improve your experience.</p>
-            </div>
-        <![endif]-->
-        @RenderBody()
-        <hr>
-        <footer role="contentinfo">
-            <p>&copy; @DateTime.Now.Year - @Application.Name</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/jqueryvalunobtrusive")
-    @Scripts.Render("~/bundles/moment")
-    @Scripts.Render("~/bundles/lodash")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/fastclick")
-    @Scripts.Render("~/bundles/stateful-fastclick")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/jqueryvalunobtrusive")
+        @Scripts.Render("~/bundles/moment")
+        @Scripts.Render("~/bundles/lodash")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/bundles/fastclick")
+        @Scripts.Render("~/bundles/stateful-fastclick")
 
-    @Scripts.Render("~/bundles/angular")
-    @Scripts.Render("~/bundles/angular-route")
-    @Scripts.Render("~/bundles/angular-touch")
-    @Scripts.Render("~/bundles/angular-stateful-fastclick")
-    @Scripts.Render("~/bundles/angular-ui-bootstrap")
-    @Scripts.Render("~/bundles/angular-uuid")
-    @Scripts.Render("~/bundles/angular-moment")
-    @Scripts.Render("~/bundles/angular-block-ui")
-    @Scripts.Render("~/bundles/angular-simple-logger")
-    @Scripts.Render("~/bundles/angular-google-maps")
-    @Scripts.Render("~/bundles/angular-chronicle")
-    @Scripts.Render("~/bundles/ng-sortable")
-    @Scripts.Render("~/bundles/angular-file-upload")
+        @Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/angular-route")
+        @Scripts.Render("~/bundles/angular-touch")
+        @Scripts.Render("~/bundles/angular-stateful-fastclick")
+        @Scripts.Render("~/bundles/angular-ui-bootstrap")
+        @Scripts.Render("~/bundles/angular-local-storage")
+        @Scripts.Render("~/bundles/angular-uuid")
+        @Scripts.Render("~/bundles/angular-moment")
+        @Scripts.Render("~/bundles/angular-block-ui")
+        @Scripts.Render("~/bundles/angular-simple-logger")
+        @Scripts.Render("~/bundles/angular-google-maps")
+        @Scripts.Render("~/bundles/angular-chronicle")
+        @Scripts.Render("~/bundles/ng-sortable")
+        @Scripts.Render("~/bundles/angular-file-upload")
 
-    @Scripts.Render("~/bundles/site")
+        @Scripts.Render("~/bundles/site")
 
-    @Scripts.Render("~/bundles/deePInit")
-    @Scripts.Render("~/bundles/deePApp")
+        @Scripts.Render("~/bundles/deePInit")
+        @Scripts.Render("~/bundles/deePApp")
 
-    @RenderSection("scripts", required: false)
-</body>
+        @RenderSection("scripts", required: false)
+    </body>
 </html>

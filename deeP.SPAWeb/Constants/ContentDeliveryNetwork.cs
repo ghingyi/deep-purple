@@ -21,6 +21,7 @@
             public const string Domain = "cdnjs.cloudflare.com";
 
             public const string AngularJSUIBootstrapUrl = "//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js";
+            public const string AngularJSLocalStorageUrl = "//cdnjs.cloudflare.com/ajax/libs/angular-local-storage/0.2.2/angular-local-storage.min.js";
 
             public const string AngularJSGoogleMapsUrl = "//cdnjs.cloudflare.com/ajax/libs/angular-google-maps/2.2.1/angular-google-maps.min.js";
 

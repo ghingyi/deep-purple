@@ -118,6 +118,9 @@
             Bundle angularUIBootstrapBundle = new ScriptBundle("~/bundles/angular-ui-bootstrap", ContentDeliveryNetwork.Cloudflare.AngularJSUIBootstrapUrl)
                 .Include("~/Scripts/angular-ui/ui-bootstrap-tpls.js");
             bundles.Add(angularUIBootstrapBundle);
+            Bundle angularLocalStorageBundle = new ScriptBundle("~/bundles/angular-local-storage", ContentDeliveryNetwork.Cloudflare.AngularJSLocalStorageUrl)
+                .Include("~/Scripts/angular-local-storage.js");
+            bundles.Add(angularLocalStorageBundle);
             // TODO: configure CDN
             Bundle angularUUIDBundle = new ScriptBundle("~/bundles/angular-uuid")
                 .Include("~/Scripts/angular-uuid2.js");
@@ -152,7 +155,7 @@
             // Bundles for the site's own Angular artifacts
             // TODO: configure CDN
             Bundle deePInitBundle = new ScriptBundle("~/bundles/deePInit")
-                .Include("~/Scripts/deeP/deePInit.js");
+                .Include("~/Scripts/deeP/deeP-*");
             bundles.Add(deePInitBundle);
 
             // TODO: configure CDN

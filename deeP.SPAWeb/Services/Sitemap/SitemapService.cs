@@ -87,7 +87,7 @@
             List<SitemapNode> nodes = new List<SitemapNode>();
 
             nodes.Add(
-                new SitemapNode(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetIndex))
+                new SitemapNode(this.urlHelper.AbsoluteAction(HomeControllerAction.Index, ControllerName.Home))
                 {
                     Priority = 1
                 });

@@ -11,6 +11,7 @@
     using deeP.SPAWeb.Constants;
     using deeP.SPAWeb.Services;
 
+    [RoutePrefix("")]
     public class HomeController : Controller
     {
         #region Fields
@@ -44,7 +45,7 @@
 
         #endregion
 
-        [Route("", Name = HomeControllerRoute.GetIndex)]
+        //[Route("", Name = HomeControllerRoute.GetIndex)]
         public ActionResult Index()
         {
             return this.View(HomeControllerAction.Index);
@@ -90,7 +91,7 @@
             // For simplicity we are just assuming your site is indexed on Google and redirecting to it.
             return this.Redirect(string.Format(
                 "https://www.google.co.uk/?q=site:{0} {1}", 
-                this.Url.AbsoluteRouteUrl(HomeControllerRoute.GetIndex),
+                this.Url.AbsoluteAction(HomeControllerAction.Index, ControllerName.Home),
                 query));
         }
 

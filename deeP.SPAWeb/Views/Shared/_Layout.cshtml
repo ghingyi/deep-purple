@@ -157,14 +157,14 @@
     <a href="#main" class="sr-only sr-only-focusable">Skip to main content</a>
     @* nav - The main navigation for the site. *@
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span aria-hidden="true" class="icon-bar"></span>
                     <span aria-hidden="true" class="icon-bar"></span>
                     <span aria-hidden="true" class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" role="banner" href="@Url.RouteUrl(HomeControllerRoute.GetIndex)" target="_self"><span class="fa fa-star"></span> @Application.Name</a>
+                <a class="navbar-brand" role="banner" href="@Url.Action(HomeControllerAction.Index, ControllerName.Home)" target="_self"><span class="fa fa-star"></span> @Application.Name</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -196,16 +196,15 @@
         </div>
     </nav>
     @* div id="main" - The main container for the page. Change this to the HTML5 main tag when it gains more browser support. *@
-    <div id="main" class="container body-content" role="main">
+    <div id="main" class="container-fluid body-content" role="main">
         <!--[if lt IE 8]>
             <div class="alert alert-warning" role="alert">
                 <p>You are using an outdated browser. Please <a class="alert-link" href="http://browsehappy.com/" target="_self">upgrade your browser</a> to improve your experience.</p>
             </div>
         <![endif]-->
         @RenderBody()
-        <hr>
         <footer role="contentinfo">
-            <p>&copy; @DateTime.Now.Year - @Application.Name</p>
+            <p class="text-muted">&copy; @DateTime.Now.Year - @Application.Name</p>
         </footer>
     </div>
 

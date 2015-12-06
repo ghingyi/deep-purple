@@ -83,12 +83,12 @@
 
             // self link (Required) - The URL for the syndication feed.
             feed.Links.Add(SyndicationLink.CreateSelfLink(
-                new Uri(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetFeed)), 
+                new Uri(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetFeed)),
                 ContentType.Atom));
 
             // alternate link (Recommended) - The URL for the web page showing the same data as the syndication feed.
             feed.Links.Add(SyndicationLink.CreateAlternateLink(
-                new Uri(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetIndex)), 
+                new Uri(this.urlHelper.AbsoluteAction(HomeControllerAction.Index, ControllerName.Home)),
                 ContentType.Html));
 
             // hub link (Recommended) - The URL for the PubSubHubbub hub. Used to push new entries to subscribers 
@@ -145,7 +145,7 @@
         public Task PublishUpdate()
         {
             return httpClient.PostAsync(
-                PubSubHubbubHubUrl, 
+                PubSubHubbubHubUrl,
                 new FormUrlEncodedContent(
                     new KeyValuePair<string, string>[]
                     {
@@ -178,7 +178,7 @@
         /// </summary>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/> signifying if the request is cancelled.</param>
         /// <returns>A collection of <see cref="SyndicationItem"/>'s.</returns>
-        private async Task<List<SyndicationItem>> GetItems(CancellationToken cancellationToken)
+        private Task<List<SyndicationItem>> GetItems(CancellationToken cancellationToken)
         {
             List<SyndicationItem> items = new List<SyndicationItem>();
 
@@ -209,7 +209,7 @@
                 // link (Recommended) - Identifies a related Web page. An entry must contain an alternate link if there 
                 //                      is no content element.
                 item.Links.Add(SyndicationLink.CreateAlternateLink(
-                    new Uri(this.urlHelper.AbsoluteRouteUrl(HomeControllerRoute.GetIndex)), 
+                    new Uri(this.urlHelper.AbsoluteAction(HomeControllerAction.Index, ControllerName.Home)),
                     ContentType.Html));
                 // AND/OR
                 // Text content  (Optional) - Contains or links to the complete content of the entry. Content must be 
@@ -232,8 +232,8 @@
 
                 // link - Add additional links to related images, audio or video like so.
                 item.Links.Add(SyndicationLink.CreateMediaEnclosureLink(
-                    new Uri(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png")), 
-                    ContentType.Png, 
+                    new Uri(this.urlHelper.AbsoluteContent("~/content/icons/atom-icon-48x48.png")),
+                    ContentType.Png,
                     0));
 
                 // media:thumbnail - Add a Yahoo Media thumbnail for the entry. See http://www.rssboard.org/media-rss 
@@ -243,7 +243,7 @@
                 items.Add(item);
             }
 
-            return items;
+            return Task.FromResult(items);
         }
 
         #endregion

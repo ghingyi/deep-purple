@@ -25,6 +25,7 @@
         { test: function () { try { return !!window.angular.module('ngRoute'); } catch (Exception) { return false; } }, src: "/bundles/angular-route" },
         { test: function () { try { return !!window.angular.module('ngTouch'); } catch (Exception) { return false; } }, src: "/bundles/angular-touch" },
         { test: function () { try { return !!window.angular.module('ui.bootstrap'); } catch (Exception) { return false; } }, src: "/bundles/angular-ui-bootstrap" },
+        { test: function () { try { return !!window.angular.module('LocalStorageModule'); } catch (Exception) { return false; } }, src: "/bundles/angular-local-storage" },
         { test: function () { try { return !!window.angular.module('angularMoment'); } catch (Exception) { return false; } }, src: "/bundles/angular-moment" },
         { test: function () { try { return !!window.angular.module('uiGmapgoogle-maps'); } catch (Exception) { return false; } }, src: "/bundles/angular-google-maps" }
     ];

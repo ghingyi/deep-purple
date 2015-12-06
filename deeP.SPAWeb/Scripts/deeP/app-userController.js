@@ -1,8 +1,7 @@
-﻿
-(function () {
+﻿(function () {
     "use strict";
     angular.module("deeP")
-        .controller("deePDefaultController", [
+        .controller("userController", [
             function () {
             }]);
 })();

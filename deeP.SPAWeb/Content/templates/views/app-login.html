@@ -1,0 +1,37 @@
+﻿<div class="form-background">
+    <div class="center-form-area login-vertical-padding">
+        <div class="well">
+            <form id="loginForm">
+                <fieldset>
+                    <legend><i class="fa fa-sign-in"></i> Login</legend>
+                    <p class="text-warning" ng-show="loginCtrl.error.data.error_description">{{loginCtrl.error.data.error_description}}</p>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <div class="has-feedback">
+                            <input id="username" type="text" class="form-control" ng-model="loginCtrl.cred.username" ng-required="true" ng-maxlength="256" placeholder="" />
+                            <span class="form-control-feedback text-muted" ng-show="loginCtrl.cred.username"> ({{256-loginCtrl.cred.userName.length}})</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <div class="has-feedback">
+                            <input id="password" type="password" class="form-control" ng-model="loginCtrl.cred.password" ng-required="true" ng-maxlength="100" placeholder="" />
+                            <span class="form-control-feedback text-muted" ng-show="loginCtrl.cred.password"> ({{100-loginCtrl.cred.password.length}})</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-success pull-right" ng-click="loginCtrl.login()">Login</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <style type="text/css">
+        body {
+            background-image: url('http://cdn1.momondo.net/s-1/destinations/1920-cb/BUD-002.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+    </style>
+</div>
