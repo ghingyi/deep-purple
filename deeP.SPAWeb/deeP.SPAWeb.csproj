@@ -594,6 +594,9 @@
     <Content Include="Scripts\deeP\Authorization\ngIfInRole.min.js">
       <DependentUpon>ngIfInRole.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\deeP\deeP-properties.min.js">
+      <DependentUpon>deeP-properties.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\deeP\Properties\bidListController.min.js">
       <DependentUpon>bidListController.js</DependentUpon>
     </Content>
@@ -804,6 +807,9 @@
     </Content>
     <Content Include="Scripts\deeP\Properties\sellerUserController.min.js.map">
       <DependentUpon>sellerUserController.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\deeP-properties.min.js.map">
+      <DependentUpon>deeP-properties.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\fastclick.js" />

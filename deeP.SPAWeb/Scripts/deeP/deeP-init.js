@@ -14,7 +14,10 @@
             when(navigationUris.home, {
                 templateUrl: "/content/templates/views/default.html",
                 controller: "defaultController",
-                controllerAs: "defaultCtrl"
+                controllerAs: "defaultCtrl",
+                resolve: {
+                    factory: ["$q", "$location", "accountContext", "navigationUris", userHomeRedirection]
+                }
             }).
             when(navigationUris.login, {
                 templateUrl: "/content/templates/views/login.html",
@@ -97,6 +100,14 @@
         } else {
             $location.path(navigationUris.login);
             return $q.reject(false);
+        }
+    };
+
+    var userHomeRedirection = function ($q, $location, accountContext, navigationUris) {
+        if (accountContext.username) {
+            $location.path(navigationUris.user);
+        } else {
+            return false;
         }
     };
 })();
