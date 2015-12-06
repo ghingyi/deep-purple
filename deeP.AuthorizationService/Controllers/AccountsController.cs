@@ -30,6 +30,7 @@ namespace deeP.AuthorizationService.Controllers
             return NotFound();
         }
 
+        [HttpGet]
         [Authorize]
         [Route("getclaims")]
         public IHttpActionResult GetClaims()
@@ -45,6 +46,21 @@ namespace deeP.AuthorizationService.Controllers
                          };
 
             return Ok(claims);
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("getuser")]
+        public async Task<IHttpActionResult> GetUser()
+        {
+            var user = await this.AppUserManager.FindByNameAsync(User.Identity.Name);
+            if (user != null)
+            {
+                UserResultModel resultModel = await this.ModelFactory.Create(user);
+                return Ok(resultModel);
+            }
+
+            return NotFound();
         }
 
         [AllowAnonymous]
