@@ -10,7 +10,8 @@
             login: "/login",
             registerSeller: "/register/seller",
             registerBuyer: "/register/buyer",
-            user: "/user"
+            user: "/user",
+            propertyDetails: "/property"
         });
     deePConfig.constant("roleNames",
         {

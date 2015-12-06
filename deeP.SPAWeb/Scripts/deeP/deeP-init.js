@@ -4,7 +4,7 @@
     // Bootstrap application module
     var deePapp = angular.module("deeP",
         ["ngRoute", "ngTouch", "ui.bootstrap", "LocalStorageModule", "angularMoment", "angularUUID2", "blockUI", "uiGmapgoogle-maps", "Chronicle", "as.sortable", "angularFileUpload",
-        "deePConfig", "deePAuth"]);
+        "deePConfig", "deePAuth", "deePProperties"]);
 
     deePapp.config(["$routeProvider", "$locationProvider", "$httpProvider", "uiGmapGoogleMapApiProvider", "localStorageServiceProvider", "navigationUris",
     function ($routeProvider, $locationProvider, $httpProvider, uiGmapGoogleMapApiProvider, localStorageServiceProvider, navigationUris) {
@@ -39,6 +39,14 @@
                     factory: ["$q", "$location", "accountContext", "navigationUris", authorizeRouting]
                 }
             }).
+            when(navigationUris.propertyDetails + "/:id", {
+                templateUrl: "/content/templates/views/app-propertyDetails.html",
+                controller: "propertyDetailsController",
+                controllerAs: "propertyDetailsCtrl",
+                resolve: {
+                    factory: ["$q", "$location", "accountContext", "navigationUris", authorizeRouting]
+                }
+            }).
             otherwise({
                 redirectTo: navigationUris.home
             });
@@ -57,8 +65,7 @@
         });
 
         // Setup local storage
-        // Set application prefix - none; we maintain a shared storage across different angular apps of the same origin
-        //localStorageServiceProvider.setPrefix("ratengo");
+        localStorageServiceProvider.setPrefix("deeP");
         // Use local storage (as opposed to session) - this is the default
         //localStorageServiceProvider.setStorageType("localStorage");
         // Set cookie fallback info: 30 days for root - this is the default

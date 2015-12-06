@@ -426,6 +426,11 @@
     <Content Include="Content\ng-sortable.min.css">
       <DependentUpon>ng-sortable.css</DependentUpon>
     </Content>
+    <Content Include="Content\templates\dialogs\placeBidDialog.html" />
+    <Content Include="Content\templates\dialogs\editPropertyDialog.html" />
+    <Content Include="Content\templates\directives\bidSummary.html" />
+    <Content Include="Content\templates\views\app-propertyDetails.html" />
+    <Content Include="Content\templates\directives\propertySummary.html" />
     <Content Include="Content\templates\directives\accountInfo.html" />
     <Content Include="Content\templates\views\app-login.min.html">
       <DependentUpon>app-login.html</DependentUpon>
@@ -541,6 +546,17 @@
     <Content Include="Scripts\chronicle.min.js">
       <DependentUpon>chronicle.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\deeP\app-propertyService.js" />
+    <Content Include="Scripts\deeP\app-dialogService.js" />
+    <Content Include="Scripts\deeP\app-placeBidController.js" />
+    <Content Include="Scripts\deeP\app-bidSummary.js" />
+    <Content Include="Scripts\deeP\app-editPropertyController.js" />
+    <Content Include="Scripts\deeP\app-propertySummary.js" />
+    <Content Include="Scripts\deeP\app-buyerUserController.js" />
+    <Content Include="Scripts\deeP\app-propertyDetailsController.js" />
+    <Content Include="Scripts\deeP\app-sellerUserController.js" />
+    <Content Include="Scripts\deeP\app-propertyListController.js" />
+    <Content Include="Scripts\deeP\app-bidListController.js" />
     <Content Include="Scripts\deeP\app-ngIfInRole.js" />
     <Content Include="Scripts\deeP\app-accountInfo.js" />
     <Content Include="Scripts\deeP\app-accountInfo.min.js">
@@ -577,6 +593,7 @@
     <Content Include="Scripts\deeP\app-userController.min.js">
       <DependentUpon>app-userController.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\deeP\deeP-properties.js" />
     <Content Include="Scripts\deeP\deeP-auth.min.js">
       <DependentUpon>deeP-auth.js</DependentUpon>
     </Content>
