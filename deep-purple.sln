@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deeP.AuthorizationService",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deeP.SPAWeb", "deeP.SPAWeb\deeP.SPAWeb.csproj", "{DCFCF626-24ED-44A1-ACF2-A8FE8006E99B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deeP.Abstraction", "deeP.Abstraction\deeP.Abstraction.csproj", "{40F6A688-CC78-455A-B450-09F469C77D84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deeP.Repositories.SQL", "deeP.Repositories.SQL\deeP.Repositories.SQL.csproj", "{84171797-D2F6-460F-B1CE-85220D5E4E8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "deeP.Repositories.SQL.Tests", "deeP.Repositories.SQL.Tests\deeP.Repositories.SQL.Tests.csproj", "{37218E22-7909-4134-BF3F-03CFE8A3B1F5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +27,18 @@ Global
 		{DCFCF626-24ED-44A1-ACF2-A8FE8006E99B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DCFCF626-24ED-44A1-ACF2-A8FE8006E99B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DCFCF626-24ED-44A1-ACF2-A8FE8006E99B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40F6A688-CC78-455A-B450-09F469C77D84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40F6A688-CC78-455A-B450-09F469C77D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40F6A688-CC78-455A-B450-09F469C77D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40F6A688-CC78-455A-B450-09F469C77D84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84171797-D2F6-460F-B1CE-85220D5E4E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84171797-D2F6-460F-B1CE-85220D5E4E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84171797-D2F6-460F-B1CE-85220D5E4E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84171797-D2F6-460F-B1CE-85220D5E4E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37218E22-7909-4134-BF3F-03CFE8A3B1F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37218E22-7909-4134-BF3F-03CFE8A3B1F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37218E22-7909-4134-BF3F-03CFE8A3B1F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37218E22-7909-4134-BF3F-03CFE8A3B1F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
