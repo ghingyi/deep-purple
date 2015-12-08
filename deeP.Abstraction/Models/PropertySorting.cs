@@ -9,6 +9,6 @@ namespace deeP.Abstraction.Models
     public enum PropertySorting : byte
     {
         PriceAsc = 0,
-        PriceDesc = 0
+        PriceDesc = 1
     }
 }

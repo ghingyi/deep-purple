@@ -64,6 +64,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DbTestClass.cs" />
+    <Compile Include="PropertyRepositoryTests_Query.cs" />
     <Compile Include="PropertyRepositoryTests_Bid.cs" />
     <Compile Include="PropertyRepositoryTests_Property.cs" />
     <Compile Include="ImageRepositoryTests.cs" />

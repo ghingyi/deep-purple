@@ -16,7 +16,7 @@ namespace deeP.Repositories.SQL.Tests
         [TestCategory("Image")]
         [Description("Test to see if the repository will detect null parameter properly.")]
         [ExpectedException(typeof(ArgumentNullException))]
-        public async Task Store_NullStream()
+        public async Task ImageStore_NullStream()
         {
             string result = await this.ImageRepository.StoreImageAsync(null);
         }
@@ -25,7 +25,7 @@ namespace deeP.Repositories.SQL.Tests
         [Owner("ghingyi")]
         [TestCategory("Image")]
         [Description("Test to see if the repository can store zero byte buffers.")]
-        public async Task Store_EmptyStream()
+        public async Task ImageStore_EmptyStream()
         {
             string id = await this.ImageRepository.StoreImageAsync(new MemoryStream(new byte[0]));
             Assert.IsNotNull(id, "The Id of the image stored was not expected to be null.");
@@ -53,7 +53,7 @@ namespace deeP.Repositories.SQL.Tests
         [Owner("ghingyi")]
         [TestCategory("Image")]
         [Description("Test to see if content is properly stored and can be retrieved.")]
-        public async Task Store_MemStream()
+        public async Task ImageStore_MemStream()
         {
             string content = "Look Mom, no hands!";
             byte[] buffer = Encoding.UTF8.GetBytes(content);
@@ -85,7 +85,7 @@ namespace deeP.Repositories.SQL.Tests
         [Owner("ghingyi")]
         [TestCategory("Image")]
         [Description("Test to see if content is properly stored and can be retrieved using the repository both ways.")]
-        public async Task Get_MemStream()
+        public async Task ImageGet_MemStream()
         {
             string content = "The force is with you, Luke.";
             byte[] buffer = Encoding.UTF8.GetBytes(content);
