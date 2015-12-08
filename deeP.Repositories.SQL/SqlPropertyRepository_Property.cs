@@ -23,6 +23,9 @@ namespace deeP.Repositories.SQL
             if (string.IsNullOrEmpty(userName))
                 throw new ArgumentNullException("userName");
 
+            if (propertyModel.State != PropertyState.Open)
+                throw new RepositoryException(RepositoryErrorCode.Validation, "Properties can only be created as available.");
+
             try
             {
                 using (var context = CreateContext())
@@ -78,11 +81,7 @@ namespace deeP.Repositories.SQL
                         {
                             // Retrieve property
                             Property property = await context.Properties.FindAsync(propertyModel.Id);
-                            if (property == null)
-                                throw new RepositoryException(RepositoryErrorCode.NotFound, "No property was found that could be updated.");
-
-                            if (property.Owner != userName)
-                                throw new RepositoryException(RepositoryErrorCode.Unauthorized, "Only the owner of a property can make changes.");
+                            ValidatePropertyChangeRequest(userName, property);
 
                             CopyPropertyDetails(propertyModel, userName, property);
                             
@@ -163,6 +162,19 @@ namespace deeP.Repositories.SQL
         }
 
         #region Private methods
+
+        private static void ValidatePropertyChangeRequest(string userName, Property property)
+        {
+            if (property == null)
+                throw new RepositoryException(RepositoryErrorCode.NotFound, "No property was found that could be updated.");
+
+            if (property.Owner != userName)
+                throw new RepositoryException(RepositoryErrorCode.Unauthorized, "Only the owner of a property can make changes.");
+
+            // This is to prevent possible price changes once taken
+            if (property.State != PropertyState.Open)
+                throw new RepositoryException(RepositoryErrorCode.Validation, "Only available properties can be changed.");
+        }
 
         private static Dictionary<string, Tuple<int, ImageInfoModel>> BuildImageInfoDictionary(PropertyModel propertyModel)
         {

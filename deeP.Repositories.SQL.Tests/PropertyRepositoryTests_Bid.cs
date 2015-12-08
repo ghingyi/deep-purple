@@ -80,15 +80,25 @@ namespace deeP.Repositories.SQL.Tests
         [TestMethod]
         [Owner("ghingyi")]
         [TestCategory("Bid")]
-        [Description("Test to see if the repository can detect missing required fields.")]
-        public async Task CreateBid_MissingRequiredField()
+        [Description("Test to see if the repository can detect creating bids in closed state.")]
+        public async Task CreateBid_ClosedState()
         {
+            // Create the setup by the following test
+            await CreateProperty_NoImages();
+
+            string propertyId;
+            using (var context = CreateContext())
+            {
+                // Read the only property in the database
+                propertyId = context.Properties.Single().Id;
+            }
+
             BidModel bidModel = new BidModel()
             {
                 Id = Guid.NewGuid().ToString(),
-                //PropertyId = "Something valid",
+                PropertyId = propertyId,
                 Price = 1234,
-                State = BidState.Open
+                State = BidState.Accepted
             };
 
             try
@@ -121,7 +131,7 @@ namespace deeP.Repositories.SQL.Tests
             }
             catch (RepositoryException re)
             {
-                Assert.AreEqual(RepositoryErrorCode.General, re.ErrorCode);
+                Assert.AreEqual(RepositoryErrorCode.NotFound, re.ErrorCode);
             }
         }
 
@@ -270,7 +280,7 @@ namespace deeP.Repositories.SQL.Tests
                 Price = 1234,
                 Address = "LV426",
                 LocationDetails = new Dictionary<string, object>() { { "cartridge", 0 } },
-                State = PropertyState.Taken,
+                State = PropertyState.Open,
                 ImageInfos = null
             };
 
@@ -425,6 +435,46 @@ namespace deeP.Repositories.SQL.Tests
         [TestMethod]
         [Owner("ghingyi")]
         [TestCategory("Bid")]
+        [Description("Test to see if the repository can will take off the property when a property owner accepts a bid.")]
+        public async Task UpdateBid_AcceptOneTakeOffProperty()
+        {
+            // Create the setup by the following test
+            await CreateProperty_NoImages();
+
+            string propertyId;
+            using (var context = CreateContext())
+            {
+                // Read the only property in the database
+                propertyId = context.Properties.Single().Id;
+            }
+
+            BidModel bidModelAccepted = new BidModel()
+            {
+                Id = Guid.NewGuid().ToString(),
+                PropertyId = propertyId,
+                Price = 1234,
+                State = BidState.Open
+            };
+
+            await this.PropertyRepository.CreateBidAsync(bidModelAccepted, "winner");
+
+            // Change model state of the designated bid to Accepted
+            bidModelAccepted.State = BidState.Accepted;
+
+            // We use the owner of the property
+            await this.PropertyRepository.UpdateBidAsync(bidModelAccepted, "dummy");
+
+            using (var context = CreateContext())
+            {
+                Property property = await context.Properties.FindAsync(propertyId);
+
+                Assert.AreEqual(PropertyState.Taken, property.State, "We expected property to be taken off the market.");
+            }
+        }
+
+        [TestMethod]
+        [Owner("ghingyi")]
+        [TestCategory("Bid")]
         [Description("Test to see if the repository can prevent changing the price by the owner.")]
         public async Task UpdateBid_PreventPriceChangeByOwner()
         {
@@ -539,6 +589,57 @@ namespace deeP.Repositories.SQL.Tests
                 Assert.AreEqual(0, context.Images.Count(), "We did not expect any properties to be found.");
                 Assert.AreEqual(1, context.Bids.Count(), "We expect to find only one bid.");
                 Assert.AreEqual(0, context.ImageInfos.Count(), "We did not expect any image infos to be found.");
+            }
+        }
+
+
+        [TestMethod]
+        [Owner("ghingyi")]
+        [TestCategory("Bid")]
+        [Description("Test to see if the repository can prevent accepting a bid for a property that has already been taken off the market.")]
+        public async Task UpdateBid_PreventAcceptingBidsForTakenProperty()
+        {
+            // Create the setup by the following test
+            await CreateProperty_NoImages();
+
+            string propertyId;
+            using (var context = CreateContext())
+            {
+                // Read the only property in the database
+                propertyId = context.Properties.Single().Id;
+            }
+
+            BidModel bidModelAccepted = new BidModel()
+            {
+                Id = Guid.NewGuid().ToString(),
+                PropertyId = propertyId,
+                Price = 1234,
+                State = BidState.Open
+            };
+
+            await this.PropertyRepository.CreateBidAsync(bidModelAccepted, "winner");
+
+            // Change model state of the designated bid to Accepted
+            bidModelAccepted.State = BidState.Accepted;
+
+            // We use the owner of the property
+            await this.PropertyRepository.UpdateBidAsync(bidModelAccepted, "dummy");
+
+            BidModel bidModelTooLate = new BidModel()
+            {
+                Id = Guid.NewGuid().ToString(),
+                PropertyId = propertyId,
+                Price = 1235,
+                State = BidState.Open
+            };
+
+            try
+            {
+                await this.PropertyRepository.CreateBidAsync(bidModelTooLate, "tooLateUser");
+            }
+            catch (RepositoryException re)
+            {
+                Assert.AreEqual(RepositoryErrorCode.Validation, re.ErrorCode);
             }
         }
     }

@@ -38,6 +38,35 @@ namespace deeP.Repositories.SQL.Tests
         [TestMethod]
         [Owner("ghingyi")]
         [TestCategory("Property")]
+        [Description("Test to see if the repository can detect the creation of properties as unavailable.")]
+        public async Task CreateProperty_TakenState()
+        {
+            PropertyModel propertyModel = new PropertyModel()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Description = "Comfy, quiet residence",
+                Type = PropertyType.House,
+                Bedrooms = 3,
+                Price = 1234,
+                Address = "LV426",
+                LocationDetails = new Dictionary<string, object>() { { "cartridge", 0 } },
+                State = PropertyState.Taken,
+                ImageInfos = null
+            };
+
+            try
+            {
+                await this.PropertyRepository.CreatePropertyAsync(propertyModel, "dummy");
+            }
+            catch (RepositoryException re)
+            {
+                Assert.AreEqual(RepositoryErrorCode.Validation, re.ErrorCode);
+            }
+        }
+
+        [TestMethod]
+        [Owner("ghingyi")]
+        [TestCategory("Property")]
         [Description("Test to see if the repository can create a property without images.")]
         public async Task CreateProperty_NoImages()
         {
@@ -50,7 +79,7 @@ namespace deeP.Repositories.SQL.Tests
                 Price = 1234,
                 Address = "LV426",
                 LocationDetails = new Dictionary<string, object>() { { "cartridge", 0 } },
-                State = PropertyState.Taken,
+                State = PropertyState.Open,
                 ImageInfos = null
             };
 
@@ -143,7 +172,7 @@ namespace deeP.Repositories.SQL.Tests
                 Price = 1234,
                 Address = "LV426",
                 LocationDetails = new Dictionary<string, object>() { { "cartridge", 0 } },
-                State = PropertyState.Taken,
+                State = PropertyState.Open,
                 ImageInfos = null
             };
 
@@ -174,7 +203,7 @@ namespace deeP.Repositories.SQL.Tests
                 Price = 1234,
                 Address = "LV426",
                 LocationDetails = new Dictionary<string, object>() { { "cartridge", 0 } },
-                State = PropertyState.Taken,
+                State = PropertyState.Open,
                 ImageInfos = new ImageInfoModel[] { 
                     new ImageInfoModel(){
                         Id = Guid.NewGuid().ToString(),
@@ -258,7 +287,7 @@ namespace deeP.Repositories.SQL.Tests
                 Price = 1234,
                 Address = "LV426",
                 LocationDetails = new Dictionary<string, object>() { { "cartridge", 0 } },
-                State = PropertyState.Taken,
+                State = PropertyState.Open,
                 ImageInfos = null
             };
 
@@ -458,6 +487,57 @@ namespace deeP.Repositories.SQL.Tests
                 Assert.AreEqual(0, context.Images.Count(), "We did not expect any properties to be found.");
                 Assert.AreEqual(0, context.Bids.Count(), "We did not expect any bids to be found.");
                 Assert.AreEqual(2, context.ImageInfos.Count(), "We expected to find two image infos.");
+            }
+        }
+
+
+        [TestMethod]
+        [Owner("ghingyi")]
+        [TestCategory("Bid")]
+        [Description("Test to see if the repository can detect attempts to change a property that was taken off the market.")]
+        public async Task UpdateProperty_TakenProperty()
+        {
+            PropertyModel propertyModel = new PropertyModel()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Description = "Comfy, quiet residence",
+                Type = PropertyType.House,
+                Bedrooms = 3,
+                Price = 1234,
+                Address = "LV426",
+                LocationDetails = new Dictionary<string, object>() { { "cartridge", 0 } },
+                State = PropertyState.Open,
+                ImageInfos = null
+            };
+
+            await this.PropertyRepository.CreatePropertyAsync(propertyModel, "dummy");
+
+            BidModel bidModelAccepted = new BidModel()
+            {
+                Id = Guid.NewGuid().ToString(),
+                PropertyId = propertyModel.Id,
+                Price = 1234,
+                State = BidState.Open
+            };
+
+            await this.PropertyRepository.CreateBidAsync(bidModelAccepted, "winner");
+
+            // Change model state of the designated bid to Accepted
+            bidModelAccepted.State = BidState.Accepted;
+
+            // We use the owner of the property
+            await this.PropertyRepository.UpdateBidAsync(bidModelAccepted, "dummy");
+
+            // Simulate owner trying to change the price
+            propertyModel.Price = 9999999;
+
+            try
+            {
+                await this.PropertyRepository.UpdatePropertyAsync(propertyModel, "dummy");
+            }
+            catch (RepositoryException re)
+            {
+                Assert.AreEqual(RepositoryErrorCode.Validation, re.ErrorCode);
             }
         }
     }

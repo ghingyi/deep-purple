@@ -23,17 +23,39 @@ namespace deeP.Repositories.SQL
             if (string.IsNullOrEmpty(userName))
                 throw new ArgumentNullException("userName");
 
+            if (bidModel.State != BidState.Open)
+                throw new RepositoryException(RepositoryErrorCode.Validation, "Bids can only be created in opened state.");
+
             try
             {
                 using (var context = CreateContext())
                 {
-                    Bid bid = context.Bids.Create();
-                    CopyBidDetails(bidModel, userName, bid);
+                    using (var dbContextTransaction = context.Database.BeginTransaction())
+                    {
+                        try
+                        {
+                            Property property = await context.Properties.FindAsync(bidModel.PropertyId);
 
-                    context.Bids.Add(bid);
+                            ValidateBidCreationRequest(property);
 
-                    // Insert entity into database in an implicit transaction
-                    await context.SaveChangesAsync();
+                            Bid bid = context.Bids.Create();
+                            CopyBidDetails(bidModel, userName, bid);
+
+                            property.Bids.Add(bid);
+
+                            // Insert entity into database in an implicit transaction
+                            await context.SaveChangesAsync();
+
+                            dbContextTransaction.Commit();
+                        }
+                        catch (Exception)
+                        {
+                            dbContextTransaction.Rollback();
+
+                            // Rethrow
+                            throw;
+                        }
+                    }
                 }
             }
             catch (DbEntityValidationException eve)
@@ -81,6 +103,9 @@ namespace deeP.Repositories.SQL
                                 {
                                     openBid.State = BidState.Rejected;
                                 }
+
+                                // Take the property off the market
+                                bid.Property.State = PropertyState.Taken;
                             }
 
                             // Flush changes into database and commit transaction
@@ -114,6 +139,15 @@ namespace deeP.Repositories.SQL
 
         #region Private methods
 
+        private static void ValidateBidCreationRequest(Property property)
+        {
+            if (property == null)
+                throw new RepositoryException(RepositoryErrorCode.NotFound, "Could not find property to make the bid for.");
+
+            if (property.State != PropertyState.Open)
+                throw new RepositoryException(RepositoryErrorCode.Validation, "Cannot make bid for a property that has already been taken.");
+        }
+
         private static void ValidateBidChangeRequest(BidModel bidModel, string userName, Bid bid)
         {
             if (bid.Owner != userName)
@@ -124,9 +158,19 @@ namespace deeP.Repositories.SQL
                 if (userName != bid.Property.Owner)
                     throw new RepositoryException(RepositoryErrorCode.Unauthorized, "Only the owner of a bid or property can change a bid.");
             }
-            if (bid.State != BidState.Open && bidModel.State == BidState.Open)
+            if (bid.State != BidState.Open)
             {
-                throw new RepositoryException(RepositoryErrorCode.Validation, "Closed bids cannot be reopened.");
+                if (bidModel.State != bid.State)
+                {
+                    throw new RepositoryException(RepositoryErrorCode.Validation, "Closed bids cannot be reopened or changed between accepted and rejected.");
+                }
+            }
+            else if (bid.State == BidState.Open && bidModel.State == BidState.Accepted)
+            {
+                if (bid.Property.State == PropertyState.Taken)
+                {
+                    throw new RepositoryException(RepositoryErrorCode.Validation, "Cannot accept bids for properties that have already been taken.");
+                }
             }
         }
 
