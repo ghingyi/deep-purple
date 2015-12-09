@@ -1,6 +1,7 @@
 ﻿using deeP.Abstraction;
 using deeP.Abstraction.Models;
 using deeP.SPAWeb.Api.Models;
+using deeP.SPAWeb.Constants;
 using deeP.SPAWeb.Services;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace deeP.SPAWeb.Api
         /// Adds a property listing.
         /// </summary>
         /// <param name="propertyModel">Model item of property to add.</param>
+        [Authorize(Roles = RoleName.Seller)]
         [Route("addproperty")]
         public async Task<IHttpActionResult> AddProperty(PropertyModel propertyModel)
         {
@@ -48,6 +50,7 @@ namespace deeP.SPAWeb.Api
         /// Edits a property listing.
         /// </summary>
         /// <param name="propertyModel">Model item of property to add.</param>
+        [Authorize(Roles = RoleName.Seller)]
         [Route("editproperty")]
         public async Task<IHttpActionResult> EditProperty(PropertyModel propertyModel)
         {
@@ -72,6 +75,7 @@ namespace deeP.SPAWeb.Api
         /// Adds or updates a bid for a property.
         /// </summary>
         /// <param name="propertyModel">Model item of bid to add or update.</param>
+        [Authorize(Roles = RoleName.Buyer)]
         [Route("addbid")]
         public async Task<IHttpActionResult> AddBid(BidModel bidModel)
         {
@@ -97,6 +101,7 @@ namespace deeP.SPAWeb.Api
         ///  Accept or reject a bid.
         /// </summary>
         /// <param name="closeBidModel">Model item of bid close operation.</param>
+        [Authorize(Roles = RoleName.Seller)]
         [Route("closebid")]
         public async Task<IHttpActionResult> CloseBid(CloseBidModel closeBidModel)
         {
