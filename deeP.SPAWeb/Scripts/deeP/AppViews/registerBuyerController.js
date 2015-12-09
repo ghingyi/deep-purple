@@ -6,7 +6,9 @@
     angular.module("deeP")
         .controller("registerBuyerController", ["$location", "navigationUris", "accountService",
             function ($location, navigationUris, accountService) {
-                this.user = {
+                var _this = this;
+
+                _this.user = {
                     username: "",
                     password: "",
                     confirmPassword: "",
@@ -15,12 +17,10 @@
                     lastName: "",
                     email: ""
                 };
-                this.error = null;
+                _this.error = null;
 
                 // Request buyer registration with current user details
-                this.register = function () {
-                    var _this = this;
-
+                _this.register = function () {
                     // Copy current user details
                     var currentDetails = _.clone(_this.user);
 

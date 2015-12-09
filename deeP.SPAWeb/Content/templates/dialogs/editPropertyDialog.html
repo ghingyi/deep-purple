@@ -1,12 +1,85 @@
 ﻿<div role="dialog">
     <div class="modal-header">
         <button type="button" class="close" aria-label="Close" ng-click="editPropertyCtrl.cancel()"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Specify property details</h4>
+        <h4 class="modal-title"><i class="fa fa-building"></i> Specify property details</h4>
     </div>
     <div class="modal-body">
+        <div>
+            <alert class="alert alert-warning" style="float:none" ng-repeat="alert in editPropertyCtrl.alerts" type="alert.type" close="editPropertyCtrl.closeAlert($index)">{{alert.msg}}</alert>
+        </div>
+        <form name="editPropertyForm">
+            <fieldset>
+                <p class="text-warning" ng-show="editPropertyCtrl.error && editPropertyCtrl.error.data.modelState['']">{{editPropertyCtrl.error.data.modelState[''].join(' ')}}</p>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <div class="has-feedback">
+                        <textarea id="description" class="form-control" ng-model="editPropertyCtrl.property.description" rows="5" ng-required="true" ng-maxlength="1000" placeholder="" />
+                        <span class="form-control-feedback text-muted" ng-show="editPropertyCtrl.property.description"> ({{1000-editPropertyCtrl.property.description.length}})</span>
+                    </div>
+                    <p class="text-warning" ng-repeat="desc in editPropertyCtrl.error.data.modelState['propertyModel.Description']">{{desc}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="type">Type of property</label>
+                    <select id="type" class="form-control" ng-model="editPropertyCtrl.property.type" ng-options="value.id as value.label for value in [{id:0, label:'Flat'},{id:1, label:'House'}]" ng-required="true"></select>
+                    <p class="text-warning" ng-repeat="desc in editPropertyCtrl.error.data.modelState['propertyModel.Type']">{{desc}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="bedrooms">Number of bedrooms</label>
+                    <select id="bedrooms" class="form-control" ng-model="editPropertyCtrl.property.bedrooms" ng-options="value for value in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]" ng-required="true"></select>
+                    <p class="text-warning" ng-repeat="desc in editPropertyCtrl.error.data.modelState['propertyModel.Bedrooms']">{{desc}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price <i class="fa fa-gbp"></i></label>
+                    <input id="price" type="number" class="form-control" ng-model="editPropertyCtrl.property.price" ng-required="true" placeholder="" />
+                    <p class="text-warning" ng-repeat="desc in editPropertyCtrl.error.data.modelState['propertyModel.Price']">{{desc}}</p>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <p class="text-warning" ng-repeat="desc in editPropertyCtrl.error.data.modelState['propertyModel.Address']">{{desc}}</p>
+                    <div id="locationSearchBoxDiv" class="form-group"></div>
+                    <div id="mapCanvas" ng-if="editPropertyCtrl.showMap" class="center-block">
+                        <script type="text/ng-template" id="searchbox.tpl.html">
+                            <input id="address" type="text" class="form-control" ng-model="ngModel" placeholder="Start typing for options" />
+                        </script>
+                        <style type="text/css">
+                            .angular-google-map-container {
+                                height: 250px;
+                            }
+
+                            .pac-container {
+                                z-index: 1050 !important;
+                            }
+                        </style>
+                        <ui-gmap-google-map control="editPropertyCtrl.map.control" events="editPropertyCtrl.map.events" center="editPropertyCtrl.map.center" zoom="editPropertyCtrl.map.zoom" pan="'true'" draggable="true" options="editPropertyCtrl.map.options">
+                            <ui-gmap-search-box ng-model="editPropertyCtrl.property.address" ng-required="true" parentdiv="'locationSearchBoxDiv'" template="editPropertyCtrl.searchbox.template" events="editPropertyCtrl.searchbox.events"></ui-gmap-search-box>
+                            <ui-gmap-markers models="editPropertyCtrl.map.markers" fit="editPropertyCtrl.map.fit" coords="'self'" icon="'icon'"></ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+                </div>
+                <label>Browse images to upload</label>
+                <input type="file" style="width:100%" nv-file-select="" uploader="editPropertyCtrl.uploader" multiple />
+                <div class="well">
+                    <div ng-model="editPropertyCtrl.property.imageInfos" as-sortable>
+                        <div class="panel panel-default" ng-repeat="imageInfo in editPropertyCtrl.property.imageInfos" as-sortable-item>
+                            <div class="panel-heading" as-sortable-item-handle>
+                                <div class="btn-toolbar">
+                                    <h5 class="pull-left">Drag this to reorder image</h5>
+                                    <button type="button" class="close" aria-label="Close" ng-click="editPropertyCtrl.dropImage($index)"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <img class="img-responsive propertyImagePreview" ng-src="{{imageInfo.uri}}" alt="{{imageInfo.title}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success pull-right" ng-click="editPropertyCtrl.ok()">OK</button>
-        <button class="btn btn-default pull-right" ng-click=" editPropertyCtrl.cancel()">Cancel</button>
+        <div class="btn-toolbar">
+            <button class="btn btn-success pull-right" ng-disabled="!editPropertyForm.$valid" ng-click="editPropertyCtrl.ok()">OK</button>
+            <button class="btn btn-default pull-right" ng-click="editPropertyCtrl.cancel()">Cancel</button>
+        </div>
     </div>
 </div>

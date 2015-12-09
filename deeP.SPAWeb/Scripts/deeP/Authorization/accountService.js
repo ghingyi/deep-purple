@@ -6,7 +6,7 @@
 
                 // Gets user details for currently logged in user
                 var _getUser = function () {
-                    return $http.get(authorizationServiceUrl + "api/accounts/getuser");
+                    return $http.post(authorizationServiceUrl + "api/accounts/getuser");
                 };
 
                 // Logs out the currently logged in user, if any

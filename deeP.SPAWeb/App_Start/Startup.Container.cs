@@ -3,6 +3,7 @@
     using Autofac;
     using Autofac.Integration.Mvc;
     using Autofac.Integration.WebApi;
+    using deeP.Abstraction;
     using deeP.SPAWeb.Services;
     using Owin;
     using System.Reflection;
@@ -50,6 +51,9 @@
             builder.RegisterType<RobotsService>().As<IRobotsService>().InstancePerRequest();
             builder.RegisterType<SitemapService>().As<ISitemapService>().InstancePerRequest();
             builder.RegisterType<SitemapPingerService>().As<ISitemapPingerService>().InstancePerRequest();
+
+            builder.RegisterType<deeP.Repositories.SQL.SqlPropertyRepository>().As<IPropertyRepository>().SingleInstance();
+            builder.RegisterType<deeP.Repositories.SQL.SqlImageRepository>().As<IImageRepository>().SingleInstance();
         }
 
         private static void RegisterMvcTypes(ContainerBuilder builder, Assembly assembly)

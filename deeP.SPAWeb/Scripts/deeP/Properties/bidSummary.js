@@ -7,6 +7,7 @@
                         restrict: "E",
                         scope: {
                             bid: "=",
+                            readonly: "=",
                             bidAccept: "&?",
                             bidReject: "&?"
                         },

@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>deeP.SPAWeb</RootNamespace>
-    <AssemblyName>Boilerplate.Web.Mvc5.Sample</AssemblyName>
+    <AssemblyName>deeP.SPAWeb</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -31,6 +31,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -140,6 +141,7 @@
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
@@ -217,6 +219,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\ImageController.cs" />
+    <Compile Include="Api\Models\QueryPropertiesModel.cs" />
+    <Compile Include="Api\Models\CloseBidModel.cs" />
     <Compile Include="Api\PropertyController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\Startup.FilterConfig.cs" />
@@ -267,6 +272,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\deePdb.mdf" />
+    <Content Include="App_Data\deePdb_log.ldf">
+      <DependentUpon>deePdb.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\angular-block-ui.css" />
     <Content Include="Content\angular-block-ui.min.css">
       <DependentUpon>angular-block-ui.css</DependentUpon>
@@ -383,6 +392,7 @@
     <None Include="NWebsecConfig\HttpHeaderSecurityModuleConfig.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\deep-purple.pubxml" />
     <None Include="ReadMe.html" />
     <Content Include="Content\bootstrap\site.css">
       <DependentUpon>site.less</DependentUpon>
@@ -600,6 +610,15 @@
     <Content Include="Scripts\deeP\Properties\bidListController.min.js">
       <DependentUpon>bidListController.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\deeP\Properties\bidStatusFilter.min.js">
+      <DependentUpon>bidStatusFilter.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\Properties\propertyStatusFilter.min.js">
+      <DependentUpon>propertyStatusFilter.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\Properties\propertyTypeFilter.js" />
+    <Content Include="Scripts\deeP\Properties\propertyStatusFilter.js" />
+    <Content Include="Scripts\deeP\Properties\bidStatusFilter.js" />
     <Content Include="Scripts\deeP\Properties\bidSummary.min.js">
       <DependentUpon>bidSummary.js</DependentUpon>
     </Content>
@@ -631,6 +650,9 @@
     <Content Include="Scripts\deeP\AppViews\propertyDetailsController.js" />
     <Content Include="Scripts\deeP\Properties\propertySummary.min.js">
       <DependentUpon>propertySummary.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\Properties\propertyTypeFilter.min.js">
+      <DependentUpon>propertyTypeFilter.js</DependentUpon>
     </Content>
     <Content Include="Scripts\deeP\Properties\sellerUserController.js" />
     <Content Include="Scripts\deeP\Properties\propertyListController.js" />
@@ -811,6 +833,27 @@
     <Content Include="Scripts\deeP\deeP-properties.min.js.map">
       <DependentUpon>deeP-properties.min.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\deeP\Properties\bidStatusFilter.min.js.map">
+      <DependentUpon>bidStatusFilter.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\Properties\propertyStatusFilter.min.js.map">
+      <DependentUpon>propertyStatusFilter.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\deeP\Properties\propertyTypeFilter.min.js.map">
+      <DependentUpon>propertyTypeFilter.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jasmine\boot.min.js.map">
+      <DependentUpon>boot.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jasmine\console.min.js.map">
+      <DependentUpon>console.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jasmine\jasmine-html.min.js.map">
+      <DependentUpon>jasmine-html.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jasmine\jasmine.min.js.map">
+      <DependentUpon>jasmine.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\fastclick.js" />
     <Content Include="Scripts\fastclick.min.js">
@@ -821,9 +864,21 @@
       <DependentUpon>googletagmanagerinit.js</DependentUpon>
     </Content>
     <Content Include="Scripts\jasmine\boot.js" />
+    <Content Include="Scripts\jasmine\boot.min.js">
+      <DependentUpon>boot.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jasmine\console.js" />
+    <Content Include="Scripts\jasmine\console.min.js">
+      <DependentUpon>console.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jasmine\jasmine-html.js" />
+    <Content Include="Scripts\jasmine\jasmine-html.min.js">
+      <DependentUpon>jasmine-html.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jasmine\jasmine.js" />
+    <Content Include="Scripts\jasmine\jasmine.min.js">
+      <DependentUpon>jasmine.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery-2.1.4.intellisense.min.js">
       <DependentUpon>jquery-2.1.4.intellisense.js</DependentUpon>
     </Content>
@@ -892,6 +947,7 @@
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Views\Web.config">
       <SubType>Designer</SubType>
@@ -941,10 +997,7 @@
       <DependentUpon>lodash.min.js</DependentUpon>
     </Content>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Api\Models\" />
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
@@ -952,6 +1005,16 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\deeP.Abstraction\deeP.Abstraction.csproj">
+      <Project>{40f6a688-cc78-455a-b450-09f469c77d84}</Project>
+      <Name>deeP.Abstraction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\deeP.Repositories.SQL\deeP.Repositories.SQL.csproj">
+      <Project>{84171797-d2f6-460f-b1ce-85220d5e4e8b}</Project>
+      <Name>deeP.Repositories.SQL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -1,1 +1,55 @@
-﻿<span></span>
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="pull-left">Property details</h3>
+        <div class="btn-toolbar">
+            <button class="btn btn-primary pull-right" ng-show="propertyDetailsCtrl.canPlaceBid" ng-click="propertyDetailsCtrl.placeBid()"><i class="fa fa-money"></i> Place bid</button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div ng-show="propertyDetailsCtrl.property.imageInfos && propertyDetailsCtrl.property.imageInfos.length>0" class="col-sm-6">
+                <uib-carousel>
+                    <uib-slide ng-repeat="slide in propertyDetailsCtrl.property.imageInfos">
+                        <img class="img-responsive propertyImagePreview" ng-src="{{slide.uri}}" alt="{{slide.title}}" />
+                        <div ng-hide="!slide.title" class="carousel-caption">
+                            <p>{{slide.title}}</p>
+                        </div>
+                    </uib-slide>
+                </uib-carousel>
+            </div>
+            <div ng-class="propertyDetailsCtrl.property.imageInfos && propertyDetailsCtrl.property.imageInfos.length>0? 'col-sm-6':'col-xs-12'">
+                <label>Posted by</label>
+                <p>{{propertyDetailsCtrl.property.owner}}</p>
+                <label>Description</label>
+                <p>{{propertyDetailsCtrl.property.description}}</p>
+                <label>Type</label>
+                {{propertyDetailsCtrl.property.type|propertyType}}
+                <label># of bedrooms</label>
+                <p>{{propertyDetailsCtrl.property.bedrooms}}</p>
+                <label>Price</label>
+                <p><span class="bold-text"><i class="fa fa-gbp"></i>{{propertyDetailsCtrl.property.price}}</span></p>
+                <label>Address</label>
+                <p>{{propertyDetailsCtrl.property.address}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">&nbsp;</div>
+            <div class="col-sm-8">
+                <div id="mapCanvas" ng-if="propertyDetailsCtrl.property.locationDetails" class="center-block">
+                    <style type="text/css">
+                        .angular-google-map-container {
+                            height: 400px;
+                        }
+                    </style>
+                    <ui-gmap-google-map center="propertyDetailsCtrl.property.locationDetails.center" zoom="propertyDetailsCtrl.property.locationDetails.zoom" pan="'true'" draggable="false" zoom-control="false">
+                        <ui-gmap-markers models="propertyDetailsCtrl.property.locationDetails.markers" coords="'self'" icon="'icon'"></ui-gmap-markers>
+                    </ui-gmap-google-map>
+                </div>
+                <div class="col-sm-2">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer clearfix">
+        <a class="btn btn-default pull-right" ng-href="{{propertyDetailsCtrl.navigationUris.user}}">Back</a>
+    </div>
+</div>

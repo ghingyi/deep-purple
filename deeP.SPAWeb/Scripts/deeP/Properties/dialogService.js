@@ -21,15 +21,16 @@
                 };
 
                 // Open 'place bid' dialog
-                var _openPlaceBidDialog = function () {
+                var _openPlaceBidDialog = function (property) {
                     var modalInstance = $uibModal.open({
-                        templateUrl: "/content/templates/dialogs/palceBidDialog.html",
+                        templateUrl: "/content/templates/dialogs/placeBidDialog.html",
                         controller: "placeBidController",
                         controllerAs: "placeBidCtrl",
                         size: "lg",
                         backdrop: "static",
                         keyboard: "true",
                         resolve: {
+                            property: function () { return property; }
                         }
                     });
                     return modalInstance.result;

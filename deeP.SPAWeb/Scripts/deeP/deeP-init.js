@@ -42,7 +42,7 @@
                     factory: ["$q", "$location", "accountContext", "navigationUris", authorizeRouting]
                 }
             }).
-            when(navigationUris.propertyDetails + "/:id", {
+            when(navigationUris.propertyDetails + "/:propertyId", {
                 templateUrl: "/content/templates/views/propertyDetails.html",
                 controller: "propertyDetailsController",
                 controllerAs: "propertyDetailsCtrl",

@@ -1,6 +1,8 @@
 ﻿/// <reference path="../jasmine/jasmine.js" />
 /// <reference path="../angular.js" />
 /// <reference path="../angular-mocks.js" />
+/// <reference path="../deeP/deeP-config.js" />
+/// <reference path="../deeP/deeP-auth.js" />
 /// <reference path="../deeP/deeP-init.js" />
 /// <reference path="../deeP/Authorization/accountService.js" />
 
@@ -34,7 +36,7 @@ describe("AccountService", function () {
                     return [401, { error_description: "Invalid user name or password." }];
                 }
             });
-        this.httpBackend.expect("GET", authorizationServiceUrl + "api/accounts/getuser").respond({ roles: ["Seller"] });
+        this.httpBackend.expect("POST", authorizationServiceUrl + "api/accounts/getuser").respond({ roles: ["Seller"] });
 
         // Call login; we expect two requests before the promise evaluates
         var result;
@@ -107,7 +109,7 @@ describe("AccountService", function () {
         expect(accountContext.roles).toBe(null);
     }));
 
-    it("register seller makes call", inject(function (authorizationServiceUrl, accountService) {
+    it("makes register seller call", inject(function (authorizationServiceUrl, accountService) {
         // These are the details we want registered
         var userDetails = {
             email: "dummy@mail.com",
@@ -146,7 +148,7 @@ describe("AccountService", function () {
         expect(result).toBe(true);
     }));
 
-    it("register buyer makes call", inject(function (authorizationServiceUrl, accountService) {
+    it("makes register buyer call", inject(function (authorizationServiceUrl, accountService) {
         // These are the details we want registered
         var userDetails = {
             email: "dummy@mail.com",

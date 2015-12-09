@@ -118,7 +118,7 @@
                     CustomSources = string.Join(" ", "localhost:*", "ws://localhost:*"),
 #else
                     // Allow AJAX and Web Sockets to example.com.
-                    // CustomSources = "*.example.com",
+                    CustomSources = string.Join(" ", ContentDeliveryNetwork.Other.OwnSTS, ContentDeliveryNetwork.Other.OwnSite),
 #endif
                     // Allow all AJAX and Web Sockets calls from the same domain.
                     Self = true
@@ -162,13 +162,7 @@
             filters.Add(
                 new CspImgSrcAttribute()
                 {
-#if DEBUG
-                    // Allow Browser Link to work in debug mode only.
-                    CustomSources = "data:",
-#else
-                    // Allow images from example.com.
-                    // CustomSources = "*.example.com",
-#endif
+                    CustomSources = "*",
                     // Allow images from the same domain.
                     Self = true,
                 });
@@ -189,13 +183,14 @@
                         ContentDeliveryNetwork.Google.GStatic,
                         ContentDeliveryNetwork.Google.TagManagerDomain,
                         ContentDeliveryNetwork.Google.GoogleAnalyticsDomain,
+                        ContentDeliveryNetwork.Google.ApisDomain,
                         ContentDeliveryNetwork.Microsoft.Domain,
                         ContentDeliveryNetwork.Cloudflare.Domain),
                     // Allow scripts from the same domain.
                     Self = true,
                     // Allow the use of the eval() method to create code from strings. This is unsafe and can open your 
                     // site up to XSS vulnerabilities.
-                    // UnsafeEval = true
+                    UnsafeEval = true
                 });
             // media-src - This directive restricts from where the protected resource can load video and audio.
             filters.Add(

@@ -5,16 +5,17 @@
     angular.module("deeP")
         .controller("loginController", ["$location", "navigationUris", "accountService",
             function ($location, navigationUris, accountService) {
-                this.cred = {
+                var _this = this;
+                _this.navigationUris = navigationUris;
+
+                _this.cred = {
                     username: "",
                     password: ""
                 };
-                this.error = null;
+                _this.error = null;
 
                 // Request login for current credentials
-                this.login = function () {
-                    var _this = this;
-
+                _this.login = function () {
                     // Copy credential object
                     var currentCred = _.clone(_this.cred);
 

@@ -3,7 +3,8 @@
 
     // Specify configuration constants
     var deePConfig = angular.module("deePConfig", []);
-    deePConfig.constant("authorizationServiceUrl", "http://localhost:62635/");
+    deePConfig.constant("authorizationServiceUrl", "//localhost:62635/");
+    deePConfig.constant("propertyServiceUrl", "//localhost:65120/");
     deePConfig.constant("navigationUris",
         {
             home: "/",
