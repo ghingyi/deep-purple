@@ -18,7 +18,7 @@ namespace deeP.AuthorizationService.Models
             _AppUserManager = appUserManager;
         }
 
-        public async Task<UserResultModel> Create(ApplicationUser appUser)
+        public async Task<UserResultModel> CreateModelForUser(ApplicationUser appUser)
         {
             return new UserResultModel
             {
@@ -32,6 +32,20 @@ namespace deeP.AuthorizationService.Models
                 Roles = (await _AppUserManager.GetRolesAsync(appUser.Id)).ToArray(),
                 Claims = (await _AppUserManager.GetClaimsAsync(appUser.Id)).ToArray()
             };
+        }
+
+        public ApplicationUser CreateUserForModel(CreateUserBindingModel createUserModel)
+        {
+            ApplicationUser user = new ApplicationUser()
+            {
+                UserName = createUserModel.Username,
+                Email = createUserModel.Email,
+                FirstName = createUserModel.FirstName,
+                MiddleNames = createUserModel.MiddleNames,
+                LastName = createUserModel.LastName,
+                RegistrationDate = DateTime.UtcNow,
+            };
+            return user;
         }
     }
 }

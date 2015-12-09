@@ -23,14 +23,14 @@ namespace deeP.AuthorizationService.Controllers
             var user = await this.AppUserManager.FindByIdAsync(Id);
             if (user != null)
             {
-                UserResultModel resultModel = await this.ModelFactory.Create(user);
+                UserResultModel resultModel = await this.ModelFactory.CreateModelForUser(user);
                 return Ok(resultModel);
             }
 
             return NotFound();
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         [Route("getclaims")]
         public IHttpActionResult GetClaims()
@@ -48,7 +48,7 @@ namespace deeP.AuthorizationService.Controllers
             return Ok(claims);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Authorize]
         [Route("getuser")]
         public async Task<IHttpActionResult> GetUser()
@@ -56,7 +56,7 @@ namespace deeP.AuthorizationService.Controllers
             var user = await this.AppUserManager.FindByNameAsync(User.Identity.Name);
             if (user != null)
             {
-                UserResultModel resultModel = await this.ModelFactory.Create(user);
+                UserResultModel resultModel = await this.ModelFactory.CreateModelForUser(user);
                 return Ok(resultModel);
             }
 
@@ -72,7 +72,7 @@ namespace deeP.AuthorizationService.Controllers
                 return BadRequest(ModelState);
             }
 
-            ApplicationUser user = CreateApplicationUser(createUserModel);
+            ApplicationUser user = this.ModelFactory.CreateUserForModel(createUserModel);
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
             if (!addUserResult.Succeeded)
@@ -87,7 +87,7 @@ namespace deeP.AuthorizationService.Controllers
             }
 
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
-            UserResultModel resultModel = await this.ModelFactory.Create(user);
+            UserResultModel resultModel = await this.ModelFactory.CreateModelForUser(user);
             return Created(locationHeader, resultModel);
         }
 
@@ -100,7 +100,7 @@ namespace deeP.AuthorizationService.Controllers
                 return BadRequest(ModelState);
             }
 
-            ApplicationUser user = CreateApplicationUser(createUserModel);
+            ApplicationUser user = this.ModelFactory.CreateUserForModel(createUserModel);
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
             if (!addUserResult.Succeeded)
@@ -115,7 +115,7 @@ namespace deeP.AuthorizationService.Controllers
             }
 
             Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
-            UserResultModel resultModel = await this.ModelFactory.Create(user);
+            UserResultModel resultModel = await this.ModelFactory.CreateModelForUser(user);
             return Created(locationHeader, resultModel);
         }
 
@@ -135,20 +135,6 @@ namespace deeP.AuthorizationService.Controllers
             }
 
             return Ok();
-        }
-
-        private static ApplicationUser CreateApplicationUser(CreateUserBindingModel createUserModel)
-        {
-            ApplicationUser user = new ApplicationUser()
-            {
-                UserName = createUserModel.Username,
-                Email = createUserModel.Email,
-                FirstName = createUserModel.FirstName,
-                MiddleNames = createUserModel.MiddleNames,
-                LastName = createUserModel.LastName,
-                RegistrationDate = DateTime.UtcNow,
-            };
-            return user;
         }
     }
 }

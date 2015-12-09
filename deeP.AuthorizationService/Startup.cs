@@ -31,9 +31,7 @@ namespace deeP.AuthorizationService
 
             ConfigureWebApi(httpConfig);
 
-            string originString = ConfigurationManager.AppSettings[InternalConstants.AppSettingKeys.Origins];
-            string[] origins = (originString ?? "*").Split(',', ';');
-            app.UseCors(new Microsoft.Owin.Cors.CorsOptions() { PolicyProvider = new CustomCorsPolicyProviderAttribute(origins) });
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 
             app.UseWebApi(httpConfig);
         }
@@ -45,8 +43,6 @@ namespace deeP.AuthorizationService
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
 
-            string originString = ConfigurationManager.AppSettings[InternalConstants.AppSettingKeys.Origins];
-            string[] origins = (originString ?? "*").Split(',', ';');
             string issuer = ConfigurationManager.AppSettings[InternalConstants.AppSettingKeys.Issuer] ?? "";
             string audienceString = ConfigurationManager.AppSettings[InternalConstants.AppSettingKeys.Audiences];
             string[] audiences = (audienceString ?? "").Split(',', ';');
@@ -59,7 +55,7 @@ namespace deeP.AuthorizationService
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/oauth/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(expireMinutes),
-                Provider = new CustomOAuthProvider(origins),
+                Provider = new CustomOAuthProvider(),
                 AccessTokenFormat = new CustomJwtFormat(issuer, audiences.FirstOrDefault(), audienceSecret)
             };
 

@@ -13,8 +13,6 @@ namespace deeP.AuthorizationService.Providers
 {
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
-        private readonly string[] _origins;
-
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
             context.Validated();
@@ -23,7 +21,8 @@ namespace deeP.AuthorizationService.Providers
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", _origins ?? new string[] { "*" });
+            var allowedOrigin = "*";
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
@@ -47,9 +46,8 @@ namespace deeP.AuthorizationService.Providers
             context.Validated(ticket);
         }
 
-        public CustomOAuthProvider(string[] origins)
+        public CustomOAuthProvider()
         {
-            _origins = origins;
         }
     }
 }

@@ -9,7 +9,6 @@ namespace deeP.AuthorizationService
     {
         internal static class AppSettingKeys
         {
-            internal const string Origins = "Origins";
             internal const string Issuer = "Issuer";
             internal const string Audiences = "Audiences";
             internal const string AudienceSecret = "AudienceSecret";
