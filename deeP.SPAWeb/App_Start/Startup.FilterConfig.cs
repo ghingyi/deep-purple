@@ -47,8 +47,9 @@
             // Require HTTPS to be used across the whole site. System.Web.Mvc.RequireHttpsAttribute performs a 
             // 302 Temporary redirect from a HTTP URL to a HTTPS URL. This filter gives you the option to perform a 
             // 301 Permanent redirect or a 302 temporary redirect.
-            // filters.Add(new RedirectToHttpsAttribute(true));
-
+#if !DEBUG
+            filters.Add(new RedirectToHttpsAttribute(true));
+#endif
             // X-Content-Type-Options - Adds the X-Content-Type-Options HTTP header. Stop IE9 and below from sniffing 
             //                          files and overriding the Content-Type header (MIME type).
             filters.Add(new XContentTypeOptionsAttribute());

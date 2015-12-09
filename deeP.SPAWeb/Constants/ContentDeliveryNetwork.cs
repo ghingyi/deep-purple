@@ -52,8 +52,8 @@
 
         public static class Other
         {
-            public const string OwnSTS = "deep-sts.azurewebsites.net";
-            public const string OwnSite = "deep-purple.azurewebsites.net";
+            public const string OwnSTS = "deep-sts.azurewebsites.net:*";
+            public const string OwnSite = "deep-purple.azurewebsites.net:*";
             public const string ImageCDN = "cdn1.momondo.net";
         }
     }

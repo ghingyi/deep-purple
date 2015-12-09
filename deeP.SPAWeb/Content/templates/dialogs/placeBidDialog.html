@@ -12,7 +12,7 @@
                 <p class="text-warning" ng-show="placeBidCtrl.error && placeBidCtrl.error.data.modelState['']">{{placeBidCtrl.error.data.modelState[''].join(' ')}}</p>
                 <div class="form-group">
                     <label for="price">Price <i class="fa fa-gbp"></i></label>
-                    <input id="price" type="number" class="form-control" ng-model="placeBidCtrl.bid.price" ng-required="true" ng-minlength="1" placeholder="" />
+                    <input id="price" type="number" class="form-control" ng-model="placeBidCtrl.bid.price" ng-required="true" min="1" placeholder="" />
                     <p class="text-warning" ng-repeat="desc in placeBidCtrl.error.data.modelState['bidModel.price']">{{desc}}</p>
                 </div>
             </fieldset>
@@ -20,7 +20,7 @@
     </div>
     <div class="modal-footer">
         <div class="btn-toolbar">
-            <button class="btn btn-success pull-right" ng-click="placeBidCtrl.ok()">OK</button>
+            <button class="btn btn-success pull-right" ng-disabled="!placeBidForm.$valid" ng-click="placeBidCtrl.ok()">OK</button>
             <button class="btn btn-default pull-right" ng-click="placeBidCtrl.cancel()">Cancel</button>
         </div>
     </div>

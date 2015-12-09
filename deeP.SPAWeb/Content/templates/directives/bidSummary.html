@@ -1,6 +1,6 @@
 ﻿<div class="panel" ng-class="bid.state===0?'panel-info':'panel-success'">
     <div class="panel-heading clearfix">
-        <h4 class="pull-left"><span class="text-uppercase">{{bid.state|bidStatus}}</span> bid by <span>{{bid.owner}}</span></h4>
+        <h4 class="pull-left"><span class="text-uppercase">{{bid.state|bidStatus}}</span> bid from <span>{{bid.owner}}</span></h4>
         <div class="btn-toolbar">
             <div class="pull-right" ng-show="!readonly && bid.state===0">
                 <button class="btn btn-warning" ng-click="bidReject({bid: bid})"><i class="fa fa-thumbs-down"></i> Reject</button>

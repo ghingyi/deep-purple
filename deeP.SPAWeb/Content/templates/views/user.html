@@ -64,19 +64,19 @@
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="minBedrooms">Minimum # of bedrooms</label>
-                                        <select id="minBedrooms" class="form-control" ng-model="propertyListCtrl.filter.minBedrooms" ng-options="value for value in [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]"></select>
+                                        <input id="minBedrooms" type="number" class="form-control" ng-model="propertyListCtrl.filter.minBedrooms" min="0"></input>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="minPrice">Minimum price <i class="fa fa-gbp"></i></label>
-                                        <input id="minPrice" type="number" class="form-control" ng-model="propertyListCtrl.filter.minPrice" placeholder="" />
+                                        <input id="minPrice" type="number" class="form-control" ng-model="propertyListCtrl.filter.minPrice" min="0" placeholder="" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="maxPrice">Maximum price <i class="fa fa-gbp"></i></label>
-                                        <input id="maxPrice" type="number" class="form-control" ng-model="propertyListCtrl.filter.maxPrice" placeholder="" />
+                                        <input id="maxPrice" type="number" class="form-control" ng-model="propertyListCtrl.filter.maxPrice" min="{{propertyListCtrl.filter.minPrice}}" placeholder="" />
                                     </div>
                                 </div>
                             </div>

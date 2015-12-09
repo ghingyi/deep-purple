@@ -123,7 +123,8 @@
                     {
                         url: "/api/images/storeimage",
                         method: "PUT",
-                        autoUpload: true
+                        autoUpload: true,
+                        headers: { "Accept": "application/json" }
                     });
 
                 _this.uploader.onCompleteItem = function (fileItem, response, status, headers) {
