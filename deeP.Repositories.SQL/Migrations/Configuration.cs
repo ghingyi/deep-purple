@@ -9,7 +9,12 @@ namespace deeP.Repositories.SQL.Migrations
     {
         public Configuration()
         {
+#if DEBUG
             AutomaticMigrationsEnabled = false;
+#else
+            AutomaticMigrationsEnabled = true;
+#endif
+
         }
 
         protected override void Seed(deeP.Repositories.SQL.Context.deePContext context)

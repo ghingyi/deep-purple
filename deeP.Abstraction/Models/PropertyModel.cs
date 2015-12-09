@@ -9,6 +9,9 @@ namespace deeP.Abstraction.Models
 {
     public class PropertyModel : DataModel
     {
+        [Display(Name = "Owner")]
+        public string Owner { get; set; }
+
         [Required]
         [StringLength(1000, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
         [Display(Name = "Description")]
@@ -37,7 +40,6 @@ namespace deeP.Abstraction.Models
         [Display(Name = "Images")]
         public ImageInfoModel[] ImageInfos { get; set; }
 
-        [Required]
         [Display(Name = "State")]
         public PropertyState State { get; set; }
     }

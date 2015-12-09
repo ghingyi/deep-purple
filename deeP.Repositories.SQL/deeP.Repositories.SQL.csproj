@@ -57,9 +57,9 @@
     <Compile Include="Context\Image.cs" />
     <Compile Include="Context\ImageInfo.cs" />
     <Compile Include="Context\Property.cs" />
-    <Compile Include="Migrations\201512081404236_InitialCreate.cs" />
-    <Compile Include="Migrations\201512081404236_InitialCreate.Designer.cs">
-      <DependentUpon>201512081404236_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201512081954501_InitialCreate.cs" />
+    <Compile Include="Migrations\201512081954501_InitialCreate.Designer.cs">
+      <DependentUpon>201512081954501_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MissingDllHack.cs" />
@@ -81,8 +81,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201512081404236_InitialCreate.resx">
-      <DependentUpon>201512081404236_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201512081954501_InitialCreate.resx">
+      <DependentUpon>201512081954501_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

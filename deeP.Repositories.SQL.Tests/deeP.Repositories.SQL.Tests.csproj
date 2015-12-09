@@ -84,7 +84,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Content Include="Data\deePdb.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

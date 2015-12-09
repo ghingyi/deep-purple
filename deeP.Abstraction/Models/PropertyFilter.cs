@@ -9,6 +9,9 @@ namespace deeP.Abstraction.Models
 {
     public class PropertyFilter : PageFilter
     {
+        [Display(Name = "PropertyId")]
+        public string PropertyId { get; set; }
+
         [Display(Name = "SellerName")]
         public string SellerName { get; set; }
 

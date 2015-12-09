@@ -22,6 +22,10 @@ namespace deeP.Repositories.SQL.Context
         public string Owner { get; set; }
 
         [Required]
+        [MaxLength(256)]
+        public string Title { get; set; }
+
+        [Required]
         public double Price { get; set; }
 
         [Required]

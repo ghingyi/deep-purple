@@ -12,6 +12,9 @@ namespace deeP.Abstraction.Models
         [Display(Name = "PropertyId")]
         public string PropertyId { get; set; }
 
+        [Display(Name = "SellerName")]
+        public string SellerName { get; set; }
+
         [Display(Name = "BuyerName")]
         public string BuyerName { get; set; }
 

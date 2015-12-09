@@ -516,6 +516,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyModel.Id,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };

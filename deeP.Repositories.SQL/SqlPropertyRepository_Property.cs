@@ -202,7 +202,7 @@ namespace deeP.Repositories.SQL
         private static void CopyPropertyDetails(PropertyModel propertyModel, string userName, Property property)
         {
             property.Id = propertyModel.Id;
-            property.Owner = userName;
+            property.Owner = property.Owner ?? userName;
             property.Description = propertyModel.Description;
             property.Type = propertyModel.Type;
             property.Bedrooms = propertyModel.Bedrooms;

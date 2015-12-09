@@ -23,6 +23,11 @@ namespace deeP.Repositories.SQL
                     IEnumerable<Property> query = context.Properties.Include("ImageInfos");
 
                     // Apply filters
+                    if (!string.IsNullOrEmpty(filter.PropertyId))
+                    {
+                        query = query.Where(p => p.Id == filter.PropertyId);
+                    }
+
                     if (!string.IsNullOrEmpty(filter.SellerName))
                     {
                         query = query.Where(p => p.Owner == filter.SellerName);
@@ -113,10 +118,20 @@ namespace deeP.Repositories.SQL
             {
                 using (var context = CreateContext())
                 {
-                    // Define base query - select on bids without a need to join
-                    IEnumerable<Bid> query = context.Bids;
+                    IEnumerable<Bid> query;
 
                     // Apply filters
+                    if (!string.IsNullOrEmpty(filter.SellerName))
+                    {
+                        // This will result in an equi-join for the condition to evaluate
+                        query = context.Bids.Include("Property");
+                        query = query.Where(b => b.Property.Owner == filter.SellerName);
+                    }
+                    else
+                    {
+                        query = context.Bids;
+                    }
+
                     if (!string.IsNullOrEmpty(filter.BuyerName))
                     {
                         query = query.Where(b => b.Owner == filter.BuyerName);
@@ -173,6 +188,7 @@ namespace deeP.Repositories.SQL
         private static void CopyPropertyDetails(Property property, PropertyModel propertyModel)
         {
             propertyModel.Id = property.Id;
+            propertyModel.Owner = property.Owner;
             propertyModel.Description = property.Description;
             propertyModel.Type = property.Type;
             propertyModel.Bedrooms = property.Bedrooms;
@@ -185,6 +201,8 @@ namespace deeP.Repositories.SQL
         private static void CopyBidDetails(Bid bid, BidModel bidModel)
         {
             bidModel.Id = bid.Id;
+            bidModel.Owner = bid.Owner;
+            bidModel.Title = bid.Title;
             bidModel.Price = bid.Price;
             bidModel.State = bid.State;
             bidModel.PropertyId = bid.PropertyId;

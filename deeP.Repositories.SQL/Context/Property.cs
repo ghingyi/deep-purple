@@ -40,7 +40,7 @@ namespace deeP.Repositories.SQL.Context
         public string Address { get; set; }
 
         [Required]
-        [MaxLength(1024)]
+        [MaxLength(4096)]
         public string LocationDetails { get; set; }
 
         [Required]

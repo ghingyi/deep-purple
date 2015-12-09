@@ -54,6 +54,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };
@@ -97,6 +98,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Accepted
             };
@@ -121,6 +123,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = "Something invalid",
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };
@@ -155,6 +158,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };
@@ -211,6 +215,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };
@@ -291,6 +296,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = bid.Id,
                 PropertyId = propertyModel.Id,
+                Title = "Best flat in Brum",
                 Price = 4567,
                 State = BidState.Accepted
             };
@@ -336,6 +342,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };
@@ -385,6 +392,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };
@@ -395,6 +403,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1233,
                 State = BidState.Open
             };
@@ -452,6 +461,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };
@@ -492,6 +502,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };
@@ -549,6 +560,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };
@@ -571,7 +583,7 @@ namespace deeP.Repositories.SQL.Tests
             }
             catch (RepositoryException re)
             {
-                Assert.AreEqual(RepositoryErrorCode.Unauthorized, re.ErrorCode);
+                Assert.AreEqual(RepositoryErrorCode.Validation, re.ErrorCode);
             }
 
             // Ensure no changes were made before the exception (well, just to assume there could be :) )
@@ -613,6 +625,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1234,
                 State = BidState.Open
             };
@@ -629,6 +642,7 @@ namespace deeP.Repositories.SQL.Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 PropertyId = propertyId,
+                Title = "Best flat in Brum",
                 Price = 1235,
                 State = BidState.Open
             };

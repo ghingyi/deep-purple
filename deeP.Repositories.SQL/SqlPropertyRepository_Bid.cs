@@ -177,7 +177,8 @@ namespace deeP.Repositories.SQL
         private static void CopyBidDetails(BidModel bidModel, string userName, Bid bid)
         {
             bid.Id = bidModel.Id;
-            bid.Owner = userName;
+            bid.Owner = bid.Owner ?? userName;
+            bid.Title = bidModel.Title;
             bid.Price = bidModel.Price;
             bid.State = bidModel.State;
             bid.PropertyId = bidModel.PropertyId;
