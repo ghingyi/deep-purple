@@ -31,7 +31,7 @@
 <p>
 The Azure deployment can be accessed here: <a href="https://deep-purple.azurewebsites.net/">https://deep-purple.azurewebsites.net/</a>
 </br>
-Pulling this repo should also just work for F5, but you need to add multiple startup projects: deeP.AuthorizationService and deeP.SPAWeb.
+Pulling this repo should also just work for F5, but you need to add multiple startup projects: deeP.AuthorizationService and deeP.SPAWeb. If the port bindings change, these will be reflected in the web.config files of both the Authorization Service and the SPA.
 </p>
 <h2>
     Implementation notes
