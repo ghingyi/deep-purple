@@ -28,6 +28,11 @@
 <p>
     At the same time, I did implement fancy stuff. Upload of multiple images simultaneously and ordering them with drag and drop? Check.
 </p>
+<p>
+The Azure deployment can be accessed here: <a href="https://deep-purple.azurewebsites.net/">https://deep-purple.azurewebsites.net/</a>
+</br>
+Pulling this repo should also just work for F5, but you need to add multiple startup projects: deeP.AuthorizationService and deeP.SPAWeb.
+</p>
 <h2>
     Implementation notes
 </h2>
