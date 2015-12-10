@@ -10,6 +10,7 @@
                           function (response) {
                               // Success; refresh bids
                               $scope.$broadcast("refreshBidList", true, true, false);
+                              $scope.$broadcast("refreshPropertyList", true);
                           },
                           function (error) {
                               // Failure; present error details

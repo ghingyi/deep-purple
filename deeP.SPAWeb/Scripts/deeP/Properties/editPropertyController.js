@@ -3,8 +3,8 @@
     /*global _ */
 
     angular.module("deePProperties")
-        .controller("editPropertyController", ["$scope", "$uibModalInstance", "$timeout", "uiGmapGoogleMapApi", "uuid2", "FileUploader", "propertyServiceUrl", "propertyService", "property",
-            function ($scope, $uibModalInstance, $timeout, uiGmapGoogleMapApi, uuid2, FileUploader, propertyServiceUrl, propertyService, property) {
+        .controller("editPropertyController", ["$scope", "$uibModalInstance", "$timeout", "uiGmapGoogleMapApi", "uuid2", "FileUploader", "accountContext", "propertyServiceUrl", "propertyService", "property",
+            function ($scope, $uibModalInstance, $timeout, uiGmapGoogleMapApi, uuid2, FileUploader, accountContext, propertyServiceUrl, propertyService, property) {
                 var _this = this;
 
                 _this.newProperty = !property || !property.id;
@@ -124,7 +124,10 @@
                         url: "/api/images/storeimage",
                         method: "PUT",
                         autoUpload: true,
-                        headers: { "Accept": "application/json" }
+                        headers: {
+                            "Accept": "application/json",
+                            "Authorization": "Bearer " + accountContext.accessToken
+                        }
                     });
 
                 _this.uploader.onCompleteItem = function (fileItem, response, status, headers) {
